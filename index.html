@@ -5,45 +5,107 @@
     <script>
       AFRAME.registerComponent('play-on-click', {
         init: function () {
-          this.onClick = this.onClick.bind(this);
+          this.onClick = this.onClick.bind(this)
         },
         play: function () {
-          window.addEventListener('click', this.onClick);
+          window.addEventListener('click', this.onClick)
         },
         pause: function () {
-          window.removeEventListener('click', this.onClick);
+          window.removeEventListener('click', this.onClick)
         },
         onClick: function (evt) {
-          var videoEl = this.el.getAttribute('material').src;
-          if (!videoEl) { return; }
-          this.el.object3D.visible = true;
-          videoEl.play();
-        }
+          var videoEl = this.el.getAttribute('material').src
+          if (!videoEl) {
+            return
+          }
+          this.el.object3D.visible = true
+          videoEl.play()
+        },
       })
     </script>
   </head>
   <body>
-    <a-scene mindar="imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/three-targets.mind" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene
+      mindar="imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/three-targets.mind"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
       <a-assets>
-        <video id="astronaut" src="https://plynth-barebones.s3.us-east-2.amazonaws.com/postcard-ar-trimmed.mp4" preload="auto" autoplay controls muted crossorigin="anonymous" loop="true"  playsinline webkit-playsinline></video>
+        <video
+          id="astronaut"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/postcard-ar-trimmed.mp4"
+          preload="auto"
+          autoplay
+          controls
+          muted
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
       </a-assets>
       <a-assets>
-        <video id="origami" src="https://plynth-barebones.s3.us-east-2.amazonaws.com/origami-ar.mp4" preload="auto" autoplay controls muted crossorigin="anonymous" loop="true"  playsinline webkit-playsinline></video>
+        <video
+          id="origami"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/origami-ar.mp4"
+          preload="auto"
+          autoplay
+          controls
+          muted
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
       </a-assets>
       <a-assets>
-        <video id="building" src="https://plynth-barebones.s3.us-east-2.amazonaws.com/origami-ar.mp4" preload="auto" autoplay controls muted crossorigin="anonymous" loop="true"  playsinline webkit-playsinline></video>
+        <video
+          id="building"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/building-ar.mp4"
+          preload="auto"
+          autoplay
+          controls
+          muted
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-video play-on-click src="#astronaut" width="1" height="1.5" position="0 0 0" rotation="0 0 0"></a-video>
+        <a-video
+          play-on-click
+          src="#astronaut"
+          width="1"
+          height="1.5"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 1">
-        <a-video play-on-click src="#origami" width="1" height="1.5" position="0 0 0" rotation="0 0 0"></a-video>
+        <a-video
+          play-on-click
+          src="#origami"
+          width="1"
+          height="1.5"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 2">
-        <a-video play-on-click src="#building" width="1" height="1.5" position="0 0 0" rotation="0 0 0"></a-video>
+        <a-video
+          play-on-click
+          src="#building"
+          width="1"
+          height="1.5"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
       </a-entity>
     </a-scene>
   </body>
