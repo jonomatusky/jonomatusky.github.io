@@ -26,7 +26,7 @@
   </head>
   <body>
     <a-scene
-      mindar="imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/three-targets-redux.mind"
+      mindar="imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/five-targets.mind"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -74,6 +74,34 @@
           webkit-playsinline
         ></video>
       </a-assets>
+      <a-assets>
+        <video
+          id="garden"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/garden-ar.mp4"
+          preload="auto"
+          autoplay
+          controls
+          muted
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
+      </a-assets>
+      <a-assets>
+        <video
+          id="demo"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/demo-ar.mp4"
+          preload="auto"
+          autoplay
+          controls
+          muted
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
+      </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
@@ -101,6 +129,26 @@
         <a-video
           play-on-click
           src="#building"
+          width="1"
+          height="1.5"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-video
+          play-on-click
+          src="#garden"
+          width="1"
+          height="1.5"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 4">
+        <a-video
+          play-on-click
+          src="#demo"
           width="1"
           height="1.5"
           position="0 0 0"
