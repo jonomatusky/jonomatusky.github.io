@@ -26,7 +26,7 @@
   </head>
   <body>
     <a-scene
-      mindar="imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/five-targets.mind"
+      mindar="imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-four-groundup.mind"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -36,20 +36,6 @@
         <video
           id="astronaut"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/postcard-ar-trimmed.mp4"
-          preload="auto"
-          autoplay
-          controls
-          muted
-          crossorigin="anonymous"
-          loop="true"
-          playsinline
-          webkit-playsinline
-        ></video>
-      </a-assets>
-      <a-assets>
-        <video
-          id="origami"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/origami-ar.mp4"
           preload="auto"
           autoplay
           controls
@@ -90,8 +76,8 @@
       </a-assets>
       <a-assets>
         <video
-          id="demo"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/demo-ar.mp4"
+          id="groundup"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Snarky+Puppy+Trimmed.mp4"
           preload="auto"
           autoplay
           controls
@@ -118,7 +104,7 @@
       <a-entity mindar-image-target="targetIndex: 1">
         <a-video
           play-on-click
-          src="#origami"
+          src="#building"
           width="1"
           height="1.5"
           position="0 0 0"
@@ -128,7 +114,7 @@
       <a-entity mindar-image-target="targetIndex: 2">
         <a-video
           play-on-click
-          src="#building"
+          src="#garden"
           width="1"
           height="1.5"
           position="0 0 0"
@@ -138,17 +124,7 @@
       <a-entity mindar-image-target="targetIndex: 3">
         <a-video
           play-on-click
-          src="#garden"
-          width="1"
-          height="1.5"
-          position="0 0 0"
-          rotation="0 0 0"
-        ></a-video>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 4">
-        <a-video
-          play-on-click
-          src="#demo"
+          src="#groundup"
           width="1"
           height="0.667"
           position="0 0 0"
