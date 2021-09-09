@@ -23,8 +23,45 @@
         },
       })
     </script>
+    <script>
+      function myFunction() {
+        var x = document.getElementById('myDIV')
+        if (x.style.display === 'none') {
+          x.style.display = 'block'
+        } else {
+          x.style.display = 'none'
+        }
+      }
+    </script>
+    <style>
+      #myDiv {
+        background: #000;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
+    <div id="myDIV" onclick="myFunction()">
+      <p
+        style="
+          text-align: center;
+          color: white;
+          font-weight: 900;
+          font-family: 'Courier New', Courier, monospace;
+        "
+      >
+        Tap to start
+      </p>
+    </div>
     <a-scene
       mindar="imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-four-groundup.mind"
       color-space="sRGB"
