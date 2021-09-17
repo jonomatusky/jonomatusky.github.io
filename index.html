@@ -136,7 +136,6 @@
         height: 30px;
         font-size: 24px;
       }
-
     </style>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@0.3.1/dist/mindar.prod.js"></script>
     <script>
@@ -188,7 +187,7 @@
         const moreButton = document.getElementsByClassName('more-button')[0]
         let isPlaying = false
 
-        const targetFound = (elementId) => {
+        const targetFound = elementId => {
           let src = packs[elementId]
           video = document.getElementById(elementId)
           if (isScanning) {
@@ -197,13 +196,15 @@
           isPlaying = true
           isRecognized = true
           activeEntity = elementId
-          document.getElementsByClassName('question-button')[0].style.display = 'none'
-          document.getElementsByClassName('more-button')[0].style.display = 'block'
+          document.getElementsByClassName('question-button')[0].style.display =
+            'none'
+          document.getElementsByClassName('more-button')[0].style.display =
+            'block'
           document.getElementById('pack-iframe').src = src
           console.log('target found')
         }
 
-        const targetLost = (elementId) => {
+        const targetLost = elementId => {
           video = document.getElementById(elementId)
           isPlaying = false
           isRecognized = false
@@ -211,8 +212,11 @@
           setTimeout(() => {
             if (!isPlaying) {
               video.pause()
-              document.getElementsByClassName('question-button')[0].style.display = 'block'
-              document.getElementsByClassName('more-button')[0].style.display = 'none'
+              document.getElementsByClassName(
+                'question-button'
+              )[0].style.display = 'block'
+              document.getElementsByClassName('more-button')[0].style.display =
+                'none'
             }
           }, 500)
           console.log('target lost')
@@ -259,20 +263,18 @@
           isRecognized = false
           activeEntity = null
         })
-        
       })
 
       const openPack = () => {
         isPlaying = false
         isScanning = false
-        document.getElementById("pack").style.left = "0%";
+        document.getElementById('pack').style.left = '0%'
       }
 
       const closePack = () => {
         isScanning = true
-        document.getElementById("pack").style.left = "100%";
+        document.getElementById('pack').style.left = '100%'
       }
-
     </script>
   </head>
   <body>
@@ -283,7 +285,7 @@
       <iframe id="pack-iframe" height="100%" width="100%"></iframe>
     </div>
     <button class="top-button tl-button ui">
-      <i class="fas fa-bolt"></i></i>
+      <i class="fas fa-bolt"></i>
     </button>
     <button class="top-button sound-button ui">
       <i class="fas fa-volume-down"></i>
