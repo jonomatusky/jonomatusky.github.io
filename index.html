@@ -10,10 +10,15 @@
         display: hidden;
       }
 
+      .button-div {
+        display: flex;
+        justify-content: space-around;
+      }
+
       .button {
-        background-color: #00000015;
-        border: 2px solid #ffffff85;
-        color: #ffffff85;
+        background-color: #00000025;
+        border: 2px solid #ffffff;
+        color: #ffffff;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -290,9 +295,11 @@
     <button class="top-button sound-button ui">
       <i class="fas fa-volume-down"></i>
     </button>
-    <button class="button share-button ui">
-      <i class="fas fa-arrow-up"></i>
-    </button>
+    <div class="button-div">
+      <button class="button share-button ui">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </div>
     <button class="ui button question-button">
       <i class="fas fa-question"></i>
     </button>
