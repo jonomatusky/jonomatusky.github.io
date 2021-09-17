@@ -165,7 +165,9 @@
             return
           }
           this.el.object3D.visible = true
-          if (isRecognized && this.src === `#${activeEntity}`) {
+          console.log(this.el.id)
+          console.log(`${activeEntity}-a-video`)
+          if (isRecognized && this.el.id === `${activeEntity}-a-video`) {
             videoEl.play()
           }
         },
@@ -371,6 +373,7 @@
         <a-video
           play-on-click
           src="#astronaut"
+          id="astronaut-a-video"
           width="1"
           height="1.5"
           position="0 0 0"
@@ -381,6 +384,7 @@
         <a-video
           play-on-click
           src="#building"
+          id="building-a-video"
           width="1"
           height="1.5"
           position="0 0 0"
@@ -391,6 +395,7 @@
         <a-video
           play-on-click
           src="#garden"
+          id="garden-a-video"
           width="1"
           height="1.5"
           position="0 0 0"
@@ -401,6 +406,7 @@
         <a-video
           play-on-click
           src="#groundup"
+          id="groundup-a-video"
           width="1"
           height="0.667"
           position="0 0 0"
