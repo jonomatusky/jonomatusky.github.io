@@ -1,0 +1,434 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://kit.fontawesome.com/575b5e8416.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      i {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .a-loader-title {
+        display: hidden;
+      }
+
+      .button-div {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .button {
+        background-color: #00000025;
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 50%;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      .ui {
+        position: absolute;
+        z-index: 1000;
+      }
+
+      .share-button {
+        bottom: 10px;
+        left: 10px;
+        width: 45px;
+        height: 45px;
+        font-size: 24px;
+      }
+
+      .question-button {
+        bottom: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+      }
+
+      .more-button {
+        bottom: 10px;
+        right: 10px;
+        height: 40px;
+        font-size: 16px;
+        border-radius: 20px;
+        padding-right: 15px;
+        padding-left: 15px;
+        display: none;
+      }
+
+      .top-button {
+        background-color: #00000000;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 24px;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      .tl-button {
+        top: 10px;
+        left: 10px;
+      }
+
+      .sound-button {
+        top: 10px;
+        right: 10px;
+      }
+
+      #reticle-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+      }
+
+      #reticle-container.hidden {
+        display: none;
+      }
+
+      #reticle {
+        position: relative;
+        width: 90vw;
+        height: 105vw;
+        opacity: 0.8;
+        background: linear-gradient(to right, #fff 5px, transparent 5px) 0 0,
+          linear-gradient(to right, #fff 5px, transparent 5px) 0 100%,
+          linear-gradient(to left, #fff 5px, transparent 5px) 100% 0,
+          linear-gradient(to left, #fff 5px, transparent 5px) 100% 100%,
+          linear-gradient(to bottom, #fff 5px, transparent 5px) 0 0,
+          linear-gradient(to bottom, #fff 5px, transparent 5px) 100% 0,
+          linear-gradient(to top, #fff 5px, transparent 5px) 0 100%,
+          linear-gradient(to top, #fff 5px, transparent 5px) 100% 100%;
+        background-repeat: no-repeat;
+        background-size: 40px 40px;
+      }
+
+      #pack {
+        position: fixed;
+        width: 100vw;
+        top: 0;
+        bottom: 0;
+        z-index: 2000;
+        left: 100%;
+        overflow-x: hidden;
+        transition: 0.5s;
+      }
+
+      .pack-close {
+        background-color: #00000000;
+        border: none;
+        color: #000000;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 24px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@0.3.1/dist/mindar.prod.js"></script>
+    <script>
+      let isRecognized = false
+      let activeEntity = null
+      let isScanning = true
+
+      // window.addEventListener('resize', () => {
+      //   let vh = window.innerHeight * 0.01
+      //   document.documentElement.style.setProperty('--vh', `${vh}px`)
+      // })
+
+      AFRAME.registerComponent('play-on-click', {
+        init: function () {
+          this.onClick = this.onClick.bind(this)
+        },
+        play: function () {
+          window.addEventListener('click', this.onClick)
+        },
+        pause: function () {
+          window.removeEventListener('click', this.onClick)
+        },
+        onClick: function (evt) {
+          var videoEl = this.el.getAttribute('material').src
+          if (!videoEl) {
+            return
+          }
+          this.el.object3D.visible = true
+          console.log(this.el.id)
+          console.log(`${activeEntity}-a-video`)
+          if (isRecognized && this.el.id === `${activeEntity}-a-video`) {
+            videoEl.play()
+          }
+        },
+      })
+
+      const packs = {
+        groundup: 'https://plynth.com/p/60ba0b0a96c6780017bd3179',
+        astronaut: 'https://plynth.com/p/6091568de2aafe00170a134f',
+        building: 'https://plynth.com/p/609bb2b34cd1c90017c75379',
+        garden: 'https://plynth.com/p/6081978db93b8e0017544379',
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const groundupTarget = document.querySelector('#groundup-target')
+        const astronautTarget = document.querySelector('#astronaut-target')
+        const buildingTarget = document.querySelector('#building-target')
+        const gardenTarget = document.querySelector('#garden-target')
+        const moreButton = document.getElementsByClassName('more-button')[0]
+        let isPlaying = false
+
+        const targetFound = elementId => {
+          let src = packs[elementId]
+          video = document.getElementById(elementId)
+          if (isScanning) {
+            video.play()
+          }
+          isPlaying = true
+          isRecognized = true
+          activeEntity = elementId
+          document.getElementsByClassName('question-button')[0].style.display =
+            'none'
+          document.getElementsByClassName('more-button')[0].style.display =
+            'block'
+          document.getElementById('pack-iframe').src = src
+          console.log('target found')
+        }
+
+        const targetLost = elementId => {
+          video = document.getElementById(elementId)
+          isPlaying = false
+          isRecognized = false
+          activeEntity = null
+          setTimeout(() => {
+            if (!isPlaying) {
+              video.pause()
+              document.getElementsByClassName(
+                'question-button'
+              )[0].style.display = 'block'
+              document.getElementsByClassName('more-button')[0].style.display =
+                'none'
+            }
+          }, 500)
+          console.log('target lost')
+        }
+
+        groundupTarget.addEventListener('targetFound', event => {
+          targetFound('groundup')
+        })
+
+        groundupTarget.addEventListener('targetLost', event => {
+          targetLost('groundup')
+        })
+
+        astronautTarget.addEventListener('targetFound', event => {
+          targetFound('astronaut')
+        })
+
+        astronautTarget.addEventListener('targetLost', event => {
+          targetLost('astronaut')
+        })
+
+        buildingTarget.addEventListener('targetFound', event => {
+          targetFound('building')
+        })
+
+        buildingTarget.addEventListener('targetLost', event => {
+          targetLost('building')
+        })
+
+        gardenTarget.addEventListener('targetFound', event => {
+          targetFound('garden')
+        })
+
+        gardenTarget.addEventListener('targetLost', event => {
+          targetLost('garden')
+        })
+
+        moreButton.addEventListener('click', event => {
+          console.log('more button clicked')
+          video = document.getElementById(activeEntity)
+          console.log(video)
+          video.pause()
+          isPlaying = false
+          isRecognized = false
+          activeEntity = null
+        })
+      })
+
+      const openPack = () => {
+        isPlaying = false
+        isScanning = false
+        document.getElementById('pack').style.left = '0%'
+      }
+
+      const closePack = () => {
+        isScanning = true
+        document.getElementById('pack').style.left = '100%'
+      }
+    </script>
+  </head>
+  <body>
+    <div id="pack">
+      <button class="pack-close tl-button ui" onclick="closePack()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <iframe id="pack-iframe" height="100%" width="100%"></iframe>
+    </div>
+    <button class="top-button tl-button ui">
+      <i class="fas fa-bolt"></i>
+    </button>
+    <button class="top-button sound-button ui">
+      <i class="fas fa-volume-down"></i>
+    </button>
+    <button class="button share-button ui">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <button class="ui button question-button">
+      <i class="fas fa-question"></i>
+    </button>
+    <button class="ui button more-button" onclick="openPack()">
+      <b>MORE</b>
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <div id="reticle-container" class="hidden">
+      <div style="display: flex; justify-content: center; width: 100%">
+        <div id="reticle"></div>
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          padding-top: 2rem;
+        "
+      >
+        <img src="/scan-instruction.svg" style="width: 40vw" />
+      </div>
+    </div>
+    <a-scene
+      loading-screen="backgroundColor: black"
+      mindar="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-new-groundup.mind"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <video
+          id="astronaut"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/astronaut-ar-trimmed_1.mp4"
+          preload="auto"
+          autoplay
+          controls
+          muted
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
+        <video
+          id="building"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/building-ar.mp4"
+          preload="auto"
+          controls
+          muted
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
+        <video
+          id="garden"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/garden-ar.mp4"
+          preload="auto"
+          controls
+          muted
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
+        <video
+          id="groundup"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Snarky+Puppy+Trimmed_1.mp4"
+          preload="auto"
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
+        <a-video
+          play-on-click
+          src="#astronaut"
+          id="astronaut-a-video"
+          width="1"
+          height="1.5"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 1" id="building-target">
+        <a-video
+          play-on-click
+          src="#building"
+          id="building-a-video"
+          width="1"
+          height="1.5"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 2" id="garden-target">
+        <a-video
+          play-on-click
+          src="#garden"
+          id="garden-a-video"
+          width="1"
+          height="1.5"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 3" id="groundup-target">
+        <a-video
+          play-on-click
+          src="#groundup"
+          id="groundup-a-video"
+          width="1"
+          height="0.667"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
