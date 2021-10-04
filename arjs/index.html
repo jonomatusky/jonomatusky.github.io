@@ -39,11 +39,15 @@
       <video
         id="groundup"
         src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Snarky+Puppy+Trimmed_1.mp4"
-        preload="auto"
-        crossorigin="anonymous"
-        loop="true"
-        playsinline
+        video
+        autplay
+        preload="none"
+        response-type="arraybuffer"
+        loop="false"
+        crossorigin
         webkit-playsinline
+        playsinline
+        controls
       ></video>
     </a-assets>
 
@@ -55,17 +59,15 @@
       smoothTolerance=".01"
       smoothThreshold="5"
     >
-      <a-entity scale="1 1 1" position="0 0 0">
-        <a-video
-          play-on-click
-          src="#groundup"
-          id="groundup-a-video"
-          width="1"
-          height="0.667"
-          position="0 0 0"
-          rotation="0 0 0"
-        ></a-video>
-      </a-entity>
+      <a-video
+        play-on-click
+        src="#groundup"
+        id="groundup-a-video"
+        width="1"
+        height="0.667"
+        position="0 0 0"
+        rotation="0 0 0"
+      ></a-video>
 
       <!-- <a-entity
         gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
