@@ -34,19 +34,6 @@
     arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
   >
     <!-- we use cors proxy to avoid cross-origin problems -->
-
-    <a-assets>
-      <video
-        id="groundup"
-        src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Snarky+Puppy+Trimmed_1.mp4"
-        preload="auto"
-        crossorigin="anonymous"
-        loop="true"
-        playsinline
-        webkit-playsinline
-      ></video>
-    </a-assets>
-
     <a-nft
       type="nft"
       url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
@@ -55,7 +42,7 @@
       smoothTolerance=".01"
       smoothThreshold="5"
     >
-      <a-entity mindar-image-target="targetIndex: 3" id="groundup-target">
+      <a-entity scale="1 1 1" position="0 0 0">
         <a-video
           play-on-click
           src="#groundup"
@@ -66,6 +53,13 @@
           rotation="0 0 0"
         ></a-video>
       </a-entity>
+
+      <!-- <a-entity
+        gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+        scale="5 5 5"
+        position="50 150 0"
+      >
+      </a-entity> -->
     </a-nft>
     <a-entity camera></a-entity>
   </a-scene>
