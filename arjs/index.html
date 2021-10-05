@@ -32,7 +32,6 @@
     renderer="logarithmicDepthBuffer: true;"
     embedded
     arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-    device-orientation-permission-ui="enabled: false"
   >
     <!-- we use cors proxy to avoid cross-origin problems -->
 
@@ -60,13 +59,13 @@
       smoothTolerance=".01"
       smoothThreshold="5"
     >
-      <a-plane
+      <!-- <a-plane
         position="1 2 0"
-        scale="2 2 2"
+        scale="500 500 500"
         width="2"
         rotation="-90 0 0"
-        material="transparent:true; opacity: 0.7;"
-      ></a-plane>
+        material="transparent:true; opacity: 0.7; src:#groundup"
+      ></a-plane> -->
       <!-- <a-video
         src="#groundup"
         width="1"
@@ -77,12 +76,12 @@
         material
       ></a-video> -->
 
-      <!-- <a-entity
+      <a-entity
         gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
         scale="5 5 5"
         position="50 150 0"
       >
-      </a-entity> -->
+      </a-entity>
     </a-nft>
     <a-entity camera></a-entity>
   </a-scene>
