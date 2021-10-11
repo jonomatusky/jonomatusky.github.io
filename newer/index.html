@@ -304,6 +304,44 @@
     </style>
   </head>
   <body>
+    <div id="pack">
+      <button class="pack-close tl-button ui" onclick="closePack()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <iframe id="pack-iframe" height="100%" width="100%"></iframe>
+    </div>
+    <button class="top-button tl-button ui">
+      <i class="fas fa-bolt"></i>
+    </button>
+    <button class="top-button sound-button ui">
+      <i class="fas fa-volume-down"></i>
+    </button>
+    <button class="button share-button ui">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <button class="ui button question-button">
+      <i class="fas fa-question"></i>
+    </button>
+    <button class="ui button more-button" onclick="openPack()">
+      <b>MORE</b>
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <div id="reticle-container" class="hidden">
+      <div style="display: flex; justify-content: center; width: 100%">
+        <div id="reticle"></div>
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          padding-top: 2rem;
+        "
+      >
+        <img src="/scan-instruction.svg" style="width: 40vw" />
+      </div>
+    </div>
+
     <a-scene
       loading-screen="backgroundColor: black"
       mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-new.mind;"
@@ -349,7 +387,7 @@
         ></video>
         <video
           id="groundup"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Snarky+Puppy+Trimmed_1.mp4"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/GroundUp+Trimmed+Redux.mp4"
           preload="auto"
           crossorigin="anonymous"
           loop="true"
@@ -403,6 +441,8 @@
           position="0 0 0"
           rotation="0 0 0"
         ></a-video>
+        <a-plane width="1" height="0.667" position="0 0 0" rotation="0 0 0">
+        </a-plane>
       </a-entity>
     </a-scene>
   </body>
