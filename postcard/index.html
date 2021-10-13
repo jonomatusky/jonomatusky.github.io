@@ -517,7 +517,7 @@
 
     <a-scene
       loading-screen="backgroundColor: black"
-      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targest-newest.mind;"
+      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-postcard.mind;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -580,7 +580,7 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
+      <!-- <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
         <a-video
           src="#astronaut"
           id="astronaut-a-video"
@@ -589,7 +589,7 @@
           position="0 0 0"
           rotation="0 0 0"
         ></a-video>
-      </a-entity>
+      </a-entity> -->
       <!-- <a-entity mindar-image-target="targetIndex: 1" id="groundup-target">
         <a-image
           width="1"
@@ -611,7 +611,7 @@
           rotation="0 0 0"
         ></a-video>
       </a-entity> -->
-      <a-entity mindar-image-target="targetIndex: 2" id="almost-target">
+      <!-- <a-entity mindar-image-target="targetIndex: 2" id="almost-target">
         <a-video
           src="#almost"
           id="almost-a-video"
@@ -620,7 +620,7 @@
           position="0 0 .05"
           rotation="0 0 0"
         ></a-video>
-        <!-- <a-plane
+        <a-plane
           width="1"
           height="1.22"
           position="0 0 .05"
@@ -629,9 +629,9 @@
           class="play-plane"
           id="play-button-as-plane"
         >
-        </a-plane> -->
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 4" id="turn-around-target">
+        </a-plane>
+      </a-entity> -->
+      <a-entity mindar-image-target="targetIndex: 0" id="turn-around-target">
         <a-image
           width="1"
           height="0.667"
