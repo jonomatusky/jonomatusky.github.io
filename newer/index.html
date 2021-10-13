@@ -22,6 +22,7 @@
       let activeEntity = null
       let isScanning = true
       let isPlaying = false
+      let shouldPlay = false
 
       // window.addEventListener('resize', () => {
       //   let vh = window.innerHeight * 0.01
@@ -63,12 +64,6 @@
         video = document.getElementById(activeEntity)
         video.play()
         isPlaying = true
-        document.getElementsByClassName('pause-button')[0].style.display =
-          'block'
-        document.getElementsByClassName('play-button')[0].style.display = 'none'
-        document
-          .querySelector('#play-button-plane')
-          .setAttribute('visible', false)
       }
 
       const pause = () => {
@@ -79,57 +74,97 @@
           video.pause()
         }
         isPlaying = false
-        document.getElementsByClassName('play-button')[0].style.display = 'none'
-        document.getElementsByClassName('pause-button')[0].style.display =
-          'block'
-        document
-          .querySelector('#play-button-plane')
-          .setAttribute('visible', true)
+      }
+
+      const playWithTap = () => {
+        play()
+        shouldPlay = true
+      }
+
+      const pauseWithTap = () => {
+        pause()
+        shouldPlay = false
       }
 
       document.addEventListener('DOMContentLoaded', function () {
         const groundupTarget = document.querySelector('#groundup-target')
         const astronautTarget = document.querySelector('#astronaut-target')
         const almostTarget = document.querySelector('#almost-target')
+
         const moreButton = document.getElementsByClassName('more-button')[0]
+
+        document.querySelectorAll('video').forEach(item => {
+          item.addEventListener('play', event => {
+            document.getElementsByClassName('play-button')[0].style.display =
+              'none'
+            document.getElementsByClassName('pause-button')[0].style.display =
+              'block'
+            document
+              .querySelector('#play-button-plane')
+              .setAttribute('visible', true)
+          })
+          item.addEventListener('pause', event => {
+            document.getElementsByClassName('play-button')[0].style.display =
+              'block'
+            document.getElementsByClassName('pause-button')[0].style.display =
+              'none'
+            document
+              .querySelector('#play-button-plane')
+              .setAttribute('visible', false)
+          })
+        })
+
+        // const groundupVideo = document.querySelector('#groundup')
+        // const astronautVideo = document.querySelector('#astronaut')
+        // const almostVideo = document.querySelector('#almost')
+
         // const playerButton = document.getElementsByClassName('player-button')[0]
         console.log('video is: ' + isPlaying)
 
+        groundupVideo.addEventListener
+
         const targetFound = elementId => {
+          console.log('target found')
+
           let src = packs[elementId]
-          activeEntity = elementId
-          if (isScanning) {
+
+          if (activeEntity !== elementId) {
+            activeEntity = elementId
+            document.getElementById('pack-iframe').src = src
+          }
+
+          isRecognized = true
+
+          if (shouldPlay) {
+            isScanning = false
             play()
           }
-          isRecognized = true
+
           document.getElementsByClassName('question-button')[0].style.display =
             'none'
           document.getElementsByClassName('more-button')[0].style.display =
             'block'
           document.getElementsByClassName('player-container')[0].style.display =
             'flex'
-          document.getElementById('pack-iframe').src = src
-          console.log('target found')
         }
 
         const targetLost = elementId => {
           console.log('target lost')
-          video = document.getElementById(elementId)
-          isPlaying = false
+
           isRecognized = false
           activeEntity = null
           document.getElementsByClassName('player-container')[0].style.display =
             'none'
-          setTimeout(() => {
-            if (!isPlaying) {
-              video.pause()
-              document.getElementsByClassName(
-                'question-button'
-              )[0].style.display = 'block'
-              document.getElementsByClassName('more-button')[0].style.display =
-                'none'
-            }
-          }, 500)
+
+          if (isPlaying) {
+            pause()
+          }
+
+          document.getElementsByClassName('question-button')[0].style.display =
+            'block'
+          document.getElementsByClassName('more-button')[0].style.display =
+            'none'
+
           console.log('target lost')
         }
 
@@ -179,6 +214,7 @@
 
       const openPack = () => {
         isPlaying = false
+        shouldPlay = false
         isScanning = false
         document.getElementById('pack').style.left = '0%'
       }
@@ -398,10 +434,10 @@
             position: relative;
           "
         >
-          <button class="player-button play-button" onclick="play()">
+          <button class="player-button play-button" onclick="playWithTap()">
             <i class="fas fa-play"></i>
           </button>
-          <button class="player-button pause-button" onclick="pause()">
+          <button class="player-button pause-button" onclick="pauseWithTap()">
             <i class="fas fa-pause"></i>
           </button>
         </div>
@@ -435,6 +471,7 @@
       <a-assets>
         <video
           id="astronaut"
+          class="video"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/astronaut-ar-trimmed_1.mp4"
           preload="auto"
           autoplay
@@ -447,6 +484,7 @@
         ></video>
         <video
           id="groundup"
+          class="video"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/GroundUp+Trimmed+Redux.mp4"
           preload="auto"
           autoplay
@@ -458,6 +496,7 @@
         ></video>
         <video
           id="almost"
+          class="video"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Almost+Sex+-+Smallest.mp4"
           preload="auto"
           autoplay
