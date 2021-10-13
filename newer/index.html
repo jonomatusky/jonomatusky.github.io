@@ -119,11 +119,11 @@
           item.addEventListener('playing', event => {
             console.log('play event')
             isPlaying = true
-            // document.getElementsByClassName('play-container')[0].style.display =
-            //   'none'
-            // document.getElementsByClassName(
-            //   'pause-container'
-            // )[0].style.display = 'flex'
+            document.getElementsByClassName('play-container')[0].style.display =
+              'none'
+            document.getElementsByClassName(
+              'pause-container'
+            )[0].style.display = 'flex'
             const planes = document.querySelectorAll('.play-plane')
             planes.forEach(plane => {
               console.log('got a plane')
@@ -163,9 +163,9 @@
 
           isRecognized = true
 
-          if (shouldPlay) {
-            play()
-          }
+          // if (shouldPlay) {
+          //   play()
+          // }
 
           document.getElementsByClassName('question-button')[0].style.display =
             'none'
@@ -613,7 +613,7 @@
           position="0 0 .05"
           rotation="0 0 0"
         ></a-video>
-        <a-plane
+        <!-- <a-plane
           width="1"
           height="1.22"
           position="0 0 .05"
@@ -621,7 +621,7 @@
           src="#play-button-as"
           class="play-plane"
           id="play-button-as-plane"
-        >
+        > -->
         </a-plane>
       </a-entity>
     </a-scene>
