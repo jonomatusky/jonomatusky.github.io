@@ -62,18 +62,17 @@
 
       const play = () => {
         video = document.getElementById(activeEntity)
-        video.play()
-        isPlaying = true
+        if (video) {
+          video.play()
+        }
       }
 
       const pause = () => {
         console.log('pause button tapped')
         video = document.getElementById(activeEntity)
         if (video) {
-          console.log(video)
           video.pause()
         }
-        isPlaying = false
       }
 
       const playWithTap = () => {
@@ -95,6 +94,7 @@
 
         document.querySelectorAll('video').forEach(item => {
           item.addEventListener('play', event => {
+            isPlaying = true
             document.getElementsByClassName('play-button')[0].style.display =
               'none'
             document.getElementsByClassName('pause-button')[0].style.display =
@@ -104,6 +104,7 @@
               .setAttribute('visible', true)
           })
           item.addEventListener('pause', event => {
+            isPlaying = false
             document.getElementsByClassName('play-button')[0].style.display =
               'block'
             document.getElementsByClassName('pause-button')[0].style.display =
