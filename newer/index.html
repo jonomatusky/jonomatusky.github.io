@@ -68,7 +68,6 @@
       }
 
       const pause = () => {
-        console.log('pause button tapped')
         video = document.getElementById(activeEntity)
         if (video) {
           video.pause()
@@ -100,9 +99,9 @@
               'none'
             document.getElementsByClassName('pause-button')[0].style.display =
               'block'
-            document.querySelectorAll('play-plane').forEach(plane => {
-              plane.setAttribute('visible', false)
-            })
+            // document.querySelectorAll('play-plane').forEach(plane => {
+            //   plane.setAttribute('visible', false)
+            // })
           })
           item.addEventListener('pause', event => {
             console.log('pause event')
@@ -111,9 +110,9 @@
               'block'
             document.getElementsByClassName('pause-button')[0].style.display =
               'none'
-            document.querySelectorAll('play-plane').forEach(plane => {
-              plane.setAttribute('visible', true)
-            })
+            // document.querySelectorAll('play-plane').forEach(plane => {
+            //   plane.setAttribute('visible', true)
+            // })
           })
         })
 
@@ -481,6 +480,7 @@
           preload="auto"
           controls
           muted
+          autoplay
           crossorigin="anonymous"
           loop="true"
           playsinline
