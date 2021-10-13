@@ -116,7 +116,7 @@
           //   pauseWithTap()
           // })
 
-          item.addEventListener('playing', event => {
+          item.addEventListener('play', event => {
             console.log('play event')
             isPlaying = true
             document.getElementsByClassName('play-container')[0].style.display =
@@ -539,7 +539,6 @@
           preload="auto"
           controls
           crossorigin="anonymous"
-          loop="true"
           playsinline
           webkit-playsinline
         ></video>
@@ -550,7 +549,6 @@
           preload="auto"
           controls
           crossorigin="anonymous"
-          loop="true"
           playsinline
           webkit-playsinline
         ></video>
