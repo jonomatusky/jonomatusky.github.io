@@ -94,6 +94,7 @@
 
         document.querySelectorAll('video').forEach(item => {
           item.addEventListener('play', event => {
+            console.log('play event')
             isPlaying = true
             document.getElementsByClassName('play-button')[0].style.display =
               'none'
@@ -104,6 +105,7 @@
             })
           })
           item.addEventListener('pause', event => {
+            console.log('pause event')
             isPlaying = false
             document.getElementsByClassName('play-button')[0].style.display =
               'block'
