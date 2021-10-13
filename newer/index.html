@@ -99,9 +99,9 @@
               'none'
             document.getElementsByClassName('pause-button')[0].style.display =
               'block'
-            document
-              .querySelector('#play-button-plane')
-              .setAttribute('visible', true)
+            document.getElementsByClassName('play-plane').forEach(plane => {
+              plane.setAttribute('visible', false)
+            })
           })
           item.addEventListener('pause', event => {
             isPlaying = false
@@ -109,9 +109,9 @@
               'block'
             document.getElementsByClassName('pause-button')[0].style.display =
               'none'
-            document
-              .querySelector('#play-button-plane')
-              .setAttribute('visible', false)
+            document.getElementsByClassName('play-plane').forEach(plane => {
+              plane.setAttribute('visible', true)
+            })
           })
         })
 
@@ -548,6 +548,7 @@
           height="0.667"
           position="0 0 0"
           rotation="0 0 0"
+          class="play-plane"
           src="#play-button"
           id="play-button-plane"
         >
@@ -569,6 +570,7 @@
           position="0 0 0"
           rotation="0 0 0"
           src="#play-button-as"
+          class="play-plane"
           id="play-button-as-plane"
         >
         </a-plane>
