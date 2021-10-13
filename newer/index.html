@@ -93,13 +93,13 @@
         const moreButton = document.getElementsByClassName('more-button')[0]
 
         document.querySelectorAll('video').forEach(item => {
-          item.addEventListener('play', event => {
+          item.addEventListener('playing', event => {
             console.log('play event')
             isPlaying = true
-            // document.getElementsByClassName('play-button')[0].style.display =
-            //   'none'
-            // document.getElementsByClassName('pause-button')[0].style.display =
-            //   'block'
+            document.getElementsByClassName('play-button')[0].style.display =
+              'none'
+            document.getElementsByClassName('pause-button')[0].style.display =
+              'block'
             document.querySelectorAll('play-plane').forEach(plane => {
               plane.setAttribute('visible', false)
             })
@@ -152,11 +152,12 @@
           console.log('target lost')
 
           isRecognized = false
-          activeEntity = null
+
           document.getElementsByClassName('player-container')[0].style.display =
             'none'
 
           pause()
+          activeEntity = null
 
           document.getElementsByClassName('question-button')[0].style.display =
             'block'
