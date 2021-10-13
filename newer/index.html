@@ -39,18 +39,18 @@
         pause: function () {
           window.removeEventListener('click', this.onClick)
         },
-        onClick: function (evt) {
-          var videoEl = this.el.getAttribute('material').src
-          if (!videoEl) {
-            return
-          }
-          this.el.object3D.visible = true
-          console.log(this.el.id)
-          console.log(`${activeEntity}-a-video`)
-          if (isRecognized && this.el.id === `${activeEntity}-a-video`) {
-            videoEl.play()
-          }
-        },
+        // onClick: function (evt) {
+        //   var videoEl = this.el.getAttribute('material').src
+        //   if (!videoEl) {
+        //     return
+        //   }
+        //   this.el.object3D.visible = true
+        //   console.log(this.el.id)
+        //   console.log(`${activeEntity}-a-video`)
+        //   if (isRecognized && this.el.id === `${activeEntity}-a-video`) {
+        //     videoEl.play()
+        //   }
+        // },
       })
 
       const packs = {
