@@ -88,31 +88,59 @@
         const groundupTarget = document.querySelector('#groundup-target')
         const astronautTarget = document.querySelector('#astronaut-target')
         const almostTarget = document.querySelector('#almost-target')
+        const playContainer = document.querySelector('.play-container')
+        const pauseContainer = document.querySelector('.pause-container')
 
         const moreButton = document.getElementsByClassName('more-button')[0]
 
-        document.querySelectorAll('video').forEach(item => {
+        playContainer.addEventListener('click', event => {
+          playWithTap()
+        })
+
+        pauseContainer.addEventListener('click', event => {
+          pauseWithTap()
+        })
+
+        // document.querySelectorAll('.play-plane')
+        // const planes = document.querySelectorAll('.play-plane')
+        // console.log(planes)
+        // planes.forEach(playButton => {
+        //   playButton.addEventListener('click', event => {
+        //     console.log('button clicked')
+        //     playWithTap()
+        //   })
+        // })
+
+        document.querySelectorAll('.video').forEach(item => {
+          // item.addEventListener('click', event => {
+          //   pauseWithTap()
+          // })
+
           item.addEventListener('playing', event => {
             console.log('play event')
             isPlaying = true
-            document.getElementsByClassName('play-button')[0].style.display =
+            document.getElementsByClassName('play-container')[0].style.display =
               'none'
-            document.getElementsByClassName('pause-button')[0].style.display =
-              'block'
-            // document.querySelectorAll('play-plane').forEach(plane => {
-            //   plane.setAttribute('visible', false)
-            // })
+            document.getElementsByClassName(
+              'pause-container'
+            )[0].style.display = 'flex'
+            const planes = document.querySelectorAll('.play-plane')
+            planes.forEach(plane => {
+              console.log('got a plane')
+              plane.setAttribute('visible', false)
+            })
           })
           item.addEventListener('pause', event => {
             console.log('pause event')
             isPlaying = false
-            document.getElementsByClassName('play-button')[0].style.display =
-              'block'
-            document.getElementsByClassName('pause-button')[0].style.display =
-              'none'
-            // document.querySelectorAll('play-plane').forEach(plane => {
-            //   plane.setAttribute('visible', true)
-            // })
+            document.getElementsByClassName('play-container')[0].style.display =
+              'flex'
+            document.getElementsByClassName(
+              'pause-container'
+            )[0].style.display = 'none'
+            document.querySelectorAll('.play-plane').forEach(plane => {
+              plane.setAttribute('visible', true)
+            })
           })
         })
 
@@ -282,7 +310,7 @@
       }
 
       .pause-button {
-        display: none;
+        display: block;
       }
 
       .ui {
@@ -428,7 +456,38 @@
       <i class="fas fa-chevron-right"></i>
     </button>
     <div class="player-container">
-      <div style="display: flex; justify-content: center; width: 100%">
+      <div
+        class="pause-container"
+        style="
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding-top: 2rem;
+            position: relative;
+          "
+        >
+          <button class="player-button pause-button" onclick="pauseWithTap()">
+            <i class="fas fa-pause"></i>
+          </button>
+        </div>
+      </div>
+      <div
+        class="play-container"
+        style="
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+        "
+      >
         <div
           style="
             display: flex;
@@ -440,9 +499,6 @@
         >
           <button class="player-button play-button" onclick="playWithTap()">
             <i class="fas fa-play"></i>
-          </button>
-          <button class="player-button pause-button" onclick="pauseWithTap()">
-            <i class="fas fa-pause"></i>
           </button>
         </div>
       </div>
@@ -510,7 +566,7 @@
         ></video>
         <img
           id="play-button"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play.svg"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play.png"
           crossorigin="anonymous"
         />
         <img
@@ -538,6 +594,17 @@
         ></a-video>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 1" id="groundup-target">
+        <a-image
+          width="1"
+          height="0.667"
+          position="0 0 .05"
+          rotation="0 0 0"
+          src="#play-button"
+          class="play-plane"
+          material="transparent:false; alphaTest: 0.5;"
+          id="play-button-plane"
+        >
+        </a-image>
         <a-video
           src="#groundup"
           id="groundup-a-video"
@@ -546,15 +613,6 @@
           position="0 0 0"
           rotation="0 0 0"
         ></a-video>
-        <a-plane
-          width="1"
-          height="0.667"
-          position="0 0 0"
-          rotation="0 0 0"
-          src="#play-button"
-          id="play-button-plane"
-        >
-        </a-plane>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 2" id="almost-target">
         <a-video
@@ -562,13 +620,13 @@
           id="almost-a-video"
           width="1"
           height="1.22"
-          position="0 0 0"
+          position="0 0 .05"
           rotation="0 0 0"
         ></a-video>
         <a-plane
           width="1"
           height="1.22"
-          position="0 0 0"
+          position="0 0 .05"
           rotation="0 0 0"
           src="#play-button-as"
           class="play-plane"
