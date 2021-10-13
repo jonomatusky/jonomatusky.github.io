@@ -90,8 +90,7 @@
       document.addEventListener('DOMContentLoaded', function () {
         const groundupTarget = document.querySelector('#groundup-target')
         const astronautTarget = document.querySelector('#astronaut-target')
-        const buildingTarget = document.querySelector('#building-target')
-        const gardenTarget = document.querySelector('#garden-target')
+        const almostTarget = document.querySelector('#almost-target')
         const moreButton = document.getElementsByClassName('more-button')[0]
         // const playerButton = document.getElementsByClassName('player-button')[0]
         console.log('video is: ' + isPlaying)
@@ -150,20 +149,12 @@
           targetLost('astronaut')
         })
 
-        buildingTarget.addEventListener('targetFound', event => {
-          targetFound('building')
+        almostTarget.addEventListener('targetFound', event => {
+          targetFound('almost')
         })
 
-        buildingTarget.addEventListener('targetLost', event => {
-          targetLost('building')
-        })
-
-        gardenTarget.addEventListener('targetFound', event => {
-          targetFound('garden')
-        })
-
-        gardenTarget.addEventListener('targetLost', event => {
-          targetLost('garden')
+        almostTarget.addEventListener('targetLost', event => {
+          targetLost('almost')
         })
 
         moreButton.addEventListener('click', event => {
