@@ -21,6 +21,7 @@
       let isRecognized = false
       let activeEntity = null
       let isScanning = true
+      let isPlaying = false
 
       // window.addEventListener('resize', () => {
       //   let vh = window.innerHeight * 0.01
@@ -58,36 +59,68 @@
         garden: 'https://plynth.com/p/6081978db93b8e0017544379',
       }
 
+      const play = () => {
+        video = document.getElementById(activeEntity)
+        video.play()
+        isPlaying = true
+        document.getElementsByClassName('pause-button')[0].style.display =
+          'block'
+        document.getElementsByClassName('play-button')[0].style.display = 'none'
+        document
+          .querySelector('#play-button-plane')
+          .setAttribute('visible', false)
+      }
+
+      const pause = () => {
+        console.log('pause button tapped')
+        video = document.getElementById(activeEntity)
+        if (video) {
+          console.log(video)
+          video.pause()
+        }
+        isPlaying = false
+        document.getElementsByClassName('play-button')[0].style.display = 'none'
+        document.getElementsByClassName('pause-button')[0].style.display =
+          'block'
+        document
+          .querySelector('#play-button-plane')
+          .setAttribute('visible', true)
+      }
+
       document.addEventListener('DOMContentLoaded', function () {
         const groundupTarget = document.querySelector('#groundup-target')
         const astronautTarget = document.querySelector('#astronaut-target')
         const buildingTarget = document.querySelector('#building-target')
         const gardenTarget = document.querySelector('#garden-target')
         const moreButton = document.getElementsByClassName('more-button')[0]
-        let isPlaying = false
+        // const playerButton = document.getElementsByClassName('player-button')[0]
+        console.log('video is: ' + isPlaying)
 
         const targetFound = elementId => {
           let src = packs[elementId]
-          video = document.getElementById(elementId)
-          if (isScanning) {
-            video.play()
-          }
-          isPlaying = true
-          isRecognized = true
           activeEntity = elementId
+          if (isScanning) {
+            play()
+          }
+          isRecognized = true
           document.getElementsByClassName('question-button')[0].style.display =
             'none'
           document.getElementsByClassName('more-button')[0].style.display =
             'block'
+          document.getElementsByClassName('player-container')[0].style.display =
+            'flex'
           document.getElementById('pack-iframe').src = src
           console.log('target found')
         }
 
         const targetLost = elementId => {
+          console.log('target lost')
           video = document.getElementById(elementId)
           isPlaying = false
           isRecognized = false
           activeEntity = null
+          document.getElementsByClassName('player-container')[0].style.display =
+            'none'
           setTimeout(() => {
             if (!isPlaying) {
               video.pause()
@@ -142,6 +175,15 @@
           isRecognized = false
           activeEntity = null
         })
+
+        // playerButton.addEventListener('click', event => {
+        //   console.log('play button tapped')
+        //   if (isRecognized && isPlaying) {
+        //     pause()
+        //   } else if (isRecognized && !isPlaying) {
+        //     play()
+        //   }
+        // })
       })
 
       const openPack = () => {
@@ -182,6 +224,34 @@
         border-radius: 50%;
         padding: 0px;
         margin: 0px;
+      }
+
+      .player-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        display: none;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        align-content: flex-end;
+        justify-content: center;
+      }
+
+      .player-button {
+        background-color: #00000000;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-size: 40px;
+        padding: 0px;
+        margin: auto;
+        bottom: 20px;
+        display: block;
+        position: absolute;
       }
 
       .ui {
@@ -310,9 +380,9 @@
       </button>
       <iframe id="pack-iframe" height="100%" width="100%"></iframe>
     </div>
-    <button class="top-button tl-button ui">
+    <!-- <button class="top-button tl-button ui">
       <i class="fas fa-bolt"></i>
-    </button>
+    </button> -->
     <button class="top-button sound-button ui">
       <i class="fas fa-volume-down"></i>
     </button>
@@ -326,6 +396,27 @@
       <b>MORE</b>
       <i class="fas fa-chevron-right"></i>
     </button>
+    <div class="player-container">
+      <div style="display: flex; justify-content: center; width: 100%">
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding-top: 2rem;
+            position: relative;
+          "
+        >
+          <button class="player-button play-button" onclick="play()">
+            <i class="fas fa-play"></i>
+          </button>
+          <button class="player-button pause-button" onclick="pause()">
+            <i class="fas fa-pause"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div id="reticle-container" class="hidden">
       <div style="display: flex; justify-content: center; width: 100%">
         <div id="reticle"></div>
@@ -344,7 +435,7 @@
 
     <a-scene
       loading-screen="backgroundColor: black"
-      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-new.mind;"
+      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://s3.console.aws.amazon.com/s3/object/plynth-barebones?region=us-east-2&prefix=targets-umg-demo.mind;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -364,36 +455,42 @@
           webkit-playsinline
         ></video>
         <video
-          id="building"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/building-ar.mp4"
-          preload="auto"
-          controls
-          muted
-          crossorigin="anonymous"
-          loop="true"
-          playsinline
-          webkit-playsinline
-        ></video>
-        <video
-          id="garden"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/garden-ar.mp4"
-          preload="auto"
-          controls
-          muted
-          crossorigin="anonymous"
-          loop="true"
-          playsinline
-          webkit-playsinline
-        ></video>
-        <video
           id="groundup"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/GroundUp+Trimmed+Redux.mp4"
           preload="auto"
+          autoplay
+          controls
           crossorigin="anonymous"
           loop="true"
           playsinline
           webkit-playsinline
         ></video>
+        <video
+          id="almost"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Almost+Sex+-+Smallest.mp4"
+          preload="auto"
+          autoplay
+          controls
+          crossorigin="anonymous"
+          loop="true"
+          playsinline
+          webkit-playsinline
+        ></video>
+        <img
+          id="play-button"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play.svg"
+          crossorigin="anonymous"
+        />
+        <img
+          id="play-button-vertical"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play-vertical.svg"
+          crossorigin="anonymous"
+        />
+        <img
+          id="play-button-as"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play-button-almost-sex.svg"
+          crossorigin="anonymous"
+        />
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -409,29 +506,7 @@
           rotation="0 0 0"
         ></a-video>
       </a-entity>
-      <a-entity mindar-image-target="targetIndex: 1" id="building-target">
-        <a-video
-          play-on-click
-          src="#building"
-          id="building-a-video"
-          width="1"
-          height="1.5"
-          position="0 0 0"
-          rotation="0 0 0"
-        ></a-video>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 2" id="garden-target">
-        <a-video
-          play-on-click
-          src="#garden"
-          id="garden-a-video"
-          width="1"
-          height="1.5"
-          position="0 0 0"
-          rotation="0 0 0"
-        ></a-video>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 3" id="groundup-target">
+      <a-entity mindar-image-target="targetIndex: 1" id="groundup-target">
         <a-video
           play-on-click
           src="#groundup"
@@ -441,7 +516,34 @@
           position="0 0 0"
           rotation="0 0 0"
         ></a-video>
-        <a-plane width="1" height="0.667" position="0 0 0" rotation="0 0 0">
+        <a-plane
+          width="1"
+          height="0.667"
+          position="0 0 0"
+          rotation="0 0 0"
+          src="#play-button"
+          id="play-button-plane"
+        >
+        </a-plane>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 2" id="almost-target">
+        <a-video
+          play-on-click
+          src="#almost"
+          id="almost-a-video"
+          width="1"
+          height="1.22"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
+        <a-plane
+          width="1"
+          height="1.22"
+          position="0 0 0"
+          rotation="0 0 0"
+          src="#play-button-as"
+          id="play-button-as-plane"
+        >
         </a-plane>
       </a-entity>
     </a-scene>
