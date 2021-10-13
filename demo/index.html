@@ -92,7 +92,7 @@
         const pauseContainer = document.querySelector('.pause-container')
         const turnTarget = document.querySelector('#turn-around-target')
 
-        const moreButton = document.getElementsByClassName('more-button')[0]
+        // const moreButton = document.getElementsByClassName('more-button')[0]
 
         playContainer.addEventListener('click', event => {
           playWithTap()
@@ -168,10 +168,10 @@
           //   play()
           // }
 
-          document.getElementsByClassName('question-button')[0].style.display =
-            'none'
-          document.getElementsByClassName('more-button')[0].style.display =
-            'block'
+          // document.getElementsByClassName('question-button')[0].style.display =
+          //   'none'
+          // document.getElementsByClassName('more-button')[0].style.display =
+          //   'block'
           document.getElementsByClassName('player-container')[0].style.display =
             'flex'
         }
@@ -187,10 +187,10 @@
           pause()
           activeEntity = null
 
-          document.getElementsByClassName('question-button')[0].style.display =
-            'block'
-          document.getElementsByClassName('more-button')[0].style.display =
-            'none'
+          // document.getElementsByClassName('question-button')[0].style.display =
+          //   'block'
+          // document.getElementsByClassName('more-button')[0].style.display =
+          //   'none'
         }
 
         groundupTarget.addEventListener('targetFound', event => {
@@ -221,15 +221,15 @@
           console.log('Target Found')
         })
 
-        moreButton.addEventListener('click', event => {
-          console.log('more button clicked')
-          video = document.getElementById(activeEntity)
-          console.log(video)
-          video.pause()
-          isPlaying = false
-          isRecognized = false
-          activeEntity = null
-        })
+        // moreButton.addEventListener('click', event => {
+        //   console.log('more button clicked')
+        //   video = document.getElementById(activeEntity)
+        //   console.log(video)
+        //   video.pause()
+        //   isPlaying = false
+        //   isRecognized = false
+        //   activeEntity = null
+        // })
 
         // playerButton.addEventListener('click', event => {
         //   console.log('play button tapped')
@@ -459,13 +459,13 @@
     <!-- <button class="button share-button ui">
       <i class="fas fa-arrow-up"></i>
     </button> -->
-    <button class="ui button question-button">
+    <!-- <button class="ui button question-button">
       <i class="fas fa-question"></i>
     </button>
     <button class="ui button more-button" onclick="openPack()">
       <b>MORE</b>
       <i class="fas fa-chevron-right"></i>
-    </button>
+    </button> -->
     <div class="player-container">
       <div class="play-container">
         <div
