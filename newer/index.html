@@ -22,7 +22,7 @@
       let activeEntity = null
       let isScanning = true
       let isPlaying = false
-      let shouldPlay = false
+      let shouldPlay = true
 
       // window.addEventListener('resize', () => {
       //   let vh = window.innerHeight * 0.01
@@ -134,10 +134,10 @@
 
           isRecognized = true
 
-          if (shouldPlay) {
-            isScanning = false
-            play()
-          }
+          // if (shouldPlay) {
+          //   isScanning = false
+          //   play()
+          // }
 
           document.getElementsByClassName('question-button')[0].style.display =
             'none'
