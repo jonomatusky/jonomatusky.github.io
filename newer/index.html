@@ -29,29 +29,29 @@
       //   document.documentElement.style.setProperty('--vh', `${vh}px`)
       // })
 
-      AFRAME.registerComponent('play-on-click', {
-        init: function () {
-          this.onClick = this.onClick.bind(this)
-        },
-        play: function () {
-          window.addEventListener('click', this.onClick)
-        },
-        pause: function () {
-          window.removeEventListener('click', this.onClick)
-        },
-        // onClick: function (evt) {
-        //   var videoEl = this.el.getAttribute('material').src
-        //   if (!videoEl) {
-        //     return
-        //   }
-        //   this.el.object3D.visible = true
-        //   console.log(this.el.id)
-        //   console.log(`${activeEntity}-a-video`)
-        //   if (isRecognized && this.el.id === `${activeEntity}-a-video`) {
-        //     videoEl.play()
-        //   }
-        // },
-      })
+      // AFRAME.registerComponent('play-on-click', {
+      //   init: function () {
+      //     this.onClick = this.onClick.bind(this)
+      //   },
+      //   play: function () {
+      //     window.addEventListener('click', this.onClick)
+      //   },
+      //   pause: function () {
+      //     window.removeEventListener('click', this.onClick)
+      //   },
+      //   onClick: function (evt) {
+      //     var videoEl = this.el.getAttribute('material').src
+      //     if (!videoEl) {
+      //       return
+      //     }
+      //     this.el.object3D.visible = true
+      //     console.log(this.el.id)
+      //     console.log(`${activeEntity}-a-video`)
+      //     if (isRecognized && this.el.id === `${activeEntity}-a-video`) {
+      //       videoEl.play()
+      //     }
+      //   },
+      // })
 
       const packs = {
         groundup: 'https://plynth.com/p/60ba0b0a96c6780017bd3179',
@@ -531,7 +531,6 @@
 
       <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
         <a-video
-          play-on-click
           src="#astronaut"
           id="astronaut-a-video"
           width="1"
@@ -542,7 +541,6 @@
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 1" id="groundup-target">
         <a-video
-          play-on-click
           src="#groundup"
           id="groundup-a-video"
           width="1"
@@ -563,7 +561,6 @@
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 2" id="almost-target">
         <a-video
-          play-on-click
           src="#almost"
           id="almost-a-video"
           width="1"
