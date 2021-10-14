@@ -526,7 +526,7 @@
         <video
           id="astronaut"
           class="video"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/astronaut-ar-trimmed_1.mp4"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/astronaut-ar-trimmed.mp4"
           poster="https://plynth-barebones.s3.us-east-2.amazonaws.com/Postcard+Mixtape+Vol+1+600px.jpg"
           preload="auto"
           controls
@@ -583,6 +583,17 @@
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
+        <a-image
+          width="1"
+          height="1.5"
+          position="0 0 .05"
+          rotation="0 0 0"
+          src="#play-button-vertical"
+          class="play-plane"
+          material="transparent:false; alphaTest: 0.5;"
+          id="play-button-vertical-plane"
+        >
+        </a-image>
         <a-video
           src="#astronaut"
           id="astronaut-a-video"
@@ -614,6 +625,17 @@
         ></a-video>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 2" id="almost-target">
+        <a-image
+          width="1"
+          height="1.22"
+          position="0 0 .05"
+          rotation="0 0 0"
+          src="#play-button-as"
+          class="play-plane"
+          material="transparent:false; alphaTest: 0.5;"
+          id="play-button-as-plane"
+        >
+        </a-image>
         <a-video
           src="#almost"
           id="almost-a-video"
@@ -622,16 +644,6 @@
           position="0 0 .05"
           rotation="0 0 0"
         ></a-video>
-        <!-- <a-plane
-          width="1"
-          height="1.22"
-          position="0 0 .05"
-          rotation="0 0 0"
-          src="#play-button-as"
-          class="play-plane"
-          id="play-button-as-plane"
-        >
-        </a-plane> -->
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 3" id="turn-around-target">
         <a-image
