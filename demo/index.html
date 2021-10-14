@@ -23,6 +23,7 @@
       let isScanning = true
       let isPlaying = false
       let shouldPlay = true
+      let targetsFound = 0
 
       // window.addEventListener('resize', () => {
       //   let vh = window.innerHeight * 0.01
@@ -162,6 +163,9 @@
           }
 
           isRecognized = true
+          targetsFound = targetsFound + 1
+
+          document.querySelector('.player-container').style.display = 'flex'
 
           // if (shouldPlay) {
           //   play()
@@ -171,17 +175,17 @@
           //   'none'
           // document.getElementsByClassName('more-button')[0].style.display =
           //   'block'
-          document.getElementsByClassName('player-container')[0].style.display =
-            'flex'
         }
 
         const targetLost = elementId => {
           console.log('target lost')
 
           isRecognized = false
+          targetsFound = targetsFound - 1
 
-          document.getElementsByClassName('player-container')[0].style.display =
-            'none'
+          if (targetsFound === 0) {
+            document.querySelector('.player-container').style.display = 'none'
+          }
 
           pause()
           activeEntity = null
