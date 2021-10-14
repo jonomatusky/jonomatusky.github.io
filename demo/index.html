@@ -583,8 +583,18 @@
           crossorigin="anonymous"
         />
         <img
+          id="astronaut-image"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Postcard+Mixtape+Vol+1+600px.jpg"
+          crossorigin="anonymous"
+        />
+        <img
           id="groundup-image"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Front+Postcard-+GUM+June+2021+(1).jpg"
+          crossorigin="anonymous"
+        />
+        <img
+          id="almost-image"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/AS+Target.png"
           crossorigin="anonymous"
         />
       </a-assets>
@@ -603,6 +613,16 @@
           id="play-button-vertical-plane"
         >
         </a-image>
+        <a-image
+          width="1"
+          height="1.5"
+          position="0 0 .005"
+          rotation="0 0 0"
+          src="#astronaut-image"
+          class="play-plane"
+          material="transparent:false; alphaTest: 0.5;"
+          id="play-button-plane"
+        ></a-image>
         <a-video
           src="#astronaut"
           id="astronaut-a-video"
@@ -627,7 +647,7 @@
         <a-image
           width="1"
           height="0.667"
-          position="0 0 .01"
+          position="0 0 .005"
           rotation="0 0 0"
           src="#groundup-image"
           class="play-plane"
@@ -654,6 +674,16 @@
           class="play-plane"
           material="transparent:false; alphaTest: 0.5;"
           id="play-button-as-plane"
+        ></a-image>
+        <a-image
+          width="1"
+          height="1.22"
+          position="0 0 .005"
+          rotation="0 0 0"
+          src="#almost-image"
+          class="play-plane"
+          material="transparent:false; alphaTest: 0.5;"
+          id="play-button-plane"
         >
         </a-image>
         <a-video
@@ -661,7 +691,7 @@
           id="almost-a-video"
           width="1"
           height="1.22"
-          position="0 0 .05"
+          position="0 0 0"
           rotation="0 0 0"
         ></a-video>
       </a-entity>
