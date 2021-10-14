@@ -520,14 +520,14 @@
 
     <a-scene
       loading-screen="backgroundColor: black"
-      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-umg-four.mind;"
+      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-back.mind;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
       <a-assets>
-        <video
+        <!-- <video
           id="astronaut"
           class="video"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/astronaut-ar-trimmed.mp4"
@@ -576,13 +576,13 @@
           id="play-button-as"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play-button-almost-sex.svg"
           crossorigin="anonymous"
-        />
+        /> -->
         <img
           id="turn-around"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/postcard-back-section-message.png"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/turn-around.png"
           crossorigin="anonymous"
         />
-        <img
+        <!-- <img
           id="astronaut-image"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Postcard+Mixtape+Vol+1+600px.jpg"
           crossorigin="anonymous"
@@ -596,12 +596,12 @@
           id="almost-image"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/AS+Target.png"
           crossorigin="anonymous"
-        />
+        /> -->
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
+      <!-- <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
         <a-image
           width="1"
           height="1.5"
@@ -694,11 +694,11 @@
           position="0 0 0"
           rotation="0 0 0"
         ></a-video>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 3" id="turn-around-target">
+      </a-entity> -->
+      <a-entity mindar-image-target="targetIndex: 0" id="turn-around-target">
         <a-image
           width="1"
-          height="0.470"
+          height="0.667"
           position="0 0 0"
           rotation="0 0 0"
           src="#turn-around"
