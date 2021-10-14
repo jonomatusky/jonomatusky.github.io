@@ -155,11 +155,10 @@
         const targetFound = elementId => {
           console.log('target found')
 
-          let src = packs[elementId]
-
           if (activeEntity !== elementId) {
             activeEntity = elementId
-            document.getElementById('pack-iframe').src = src
+            let src = packs[elementId]
+            // document.getElementById('pack-iframe').src = src
           }
 
           isRecognized = true
@@ -528,6 +527,7 @@
           id="astronaut"
           class="video"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/astronaut-ar-trimmed_1.mp4"
+          poster="https://plynth-barebones.s3.us-east-2.amazonaws.com/Postcard+Mixtape+Vol+1+600px.jpg"
           preload="auto"
           controls
           muted
@@ -540,6 +540,7 @@
           id="groundup"
           class="video"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/GroundUp+Trimmed+Redux.mp4"
+          poster="https://plynth-barebones.s3.us-east-2.amazonaws.com/Front+Postcard-+GUM+June+2021+(1).jpg"
           preload="auto"
           controls
           crossorigin="anonymous"
@@ -550,6 +551,7 @@
           id="almost"
           class="video"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Almost+Sex+-+Smallest.mp4"
+          poster="https://plynth-barebones.s3.us-east-2.amazonaws.com/AS+Target.png"
           preload="auto"
           controls
           crossorigin="anonymous"
