@@ -149,6 +149,12 @@
         console.log('opening')
         location.href = packs[activeEntity]
       }
+
+      // const takeScreenshot = () => {
+      //   document
+      //     .querySelector('a-scene')
+      //     .components.screenshot.capture('equirectangular')
+      // }
     </script>
 
     <style>
@@ -179,9 +185,9 @@
         margin: 0px;
       }
 
-      .player-container {
+      /* .player-container {
         display: none;
-      }
+      } */
 
       .sound-button {
         background-color: #00000000;
@@ -199,6 +205,23 @@
         right: 20px;
         height: 40px;
       }
+
+      /* .share-button {
+        background-color: #00000000;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-size: 32px;
+        padding: 0px;
+        margin: auto;
+        display: block;
+        position: absolute;
+        z-index: 1000;
+        bottom: 10px;
+        left: 20px;
+        height: 40px;
+      } */
 
       .pause-container {
         display: none;
@@ -228,22 +251,15 @@
         color: #ffffff;
         text-align: center;
         text-decoration: none;
-        font-size: 40px;
-        padding: 0px;
+        font-size: 12px;
         margin: auto;
         display: block;
         position: absolute;
-        bottom: 20px;
-        right: 20px;
         height: 40px;
-        position: absolute;
         z-index: 1000;
-        margin: auto;
         bottom: 10px;
         left: 0px;
         right: 0px;
-        height: 40px;
-        font-size: 16px;
         padding-right: 20px;
         padding-left: 20px;
       }
@@ -387,8 +403,12 @@
     </div>
 
     <div class="player-container">
+      <!-- <button class="share-button" onclick="takeScreenshot()">
+        <i class="fas fa-share"></i>
+      </button> -->
+
       <button class="more-button" onclick="openPack()">
-        <div style="width: 100%; font-size: 10px"><b>SEE MORE</b></div>
+        <b>SEE MORE</b>
       </button>
 
       <button class="sound-button" onclick="toggleMute()">
