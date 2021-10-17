@@ -152,8 +152,8 @@
       })
 
       const openPack = () => {
-        console.log('opening')
-        location.href = packs[activeEntity]
+        setTimeout(() => (location.href = packs[activeEntity]), 500)
+        document.getElementById('pack').style.top = '0'
       }
 
       // const takeScreenshot = () => {
@@ -297,12 +297,13 @@
       }
 
       #pack {
+        background: #000000;
         position: fixed;
         width: 100vw;
         top: 0;
         bottom: 0;
         z-index: 2000;
-        left: 100%;
+        top: 100%;
         overflow-x: hidden;
         transition: 0.5s;
       }
@@ -350,12 +351,7 @@
     </style>
   </head>
   <body>
-    <div id="pack">
-      <button class="pack-close tl-button ui" onclick="closePack()">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <iframe id="pack-iframe" height="100%" width="100%"></iframe>
-    </div>
+    <div id="pack"></div>
 
     <div class="error-screen">
       <div class="error-message">
