@@ -172,19 +172,6 @@
         justify-content: space-around;
       }
 
-      .button {
-        background-color: #00000025;
-        border: 2px solid #ffffff;
-        color: #ffffff;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 50%;
-        padding: 0px;
-        margin: 0px;
-      }
-
       /* .player-container {
         display: none;
       } */
@@ -238,9 +225,15 @@
         display: block;
       }
 
-      .ui {
+      .more-button-div {
         position: absolute;
-        z-index: 1000;
+        z-index: 9000;
+        margin: 0 auto;
+        left: 0px;
+        right: 0px;
+        bottom: 10px;
+        display: flex;
+        justify-content: center;
       }
 
       .more-button {
@@ -252,14 +245,7 @@
         text-align: center;
         text-decoration: none;
         font-size: 12px;
-        margin: auto;
-        display: block;
-        position: absolute;
         height: 40px;
-        z-index: 1000;
-        bottom: 10px;
-        left: 0px;
-        right: 0px;
         padding-right: 20px;
         padding-left: 20px;
       }
@@ -407,9 +393,11 @@
         <i class="fas fa-share"></i>
       </button> -->
 
-      <button class="more-button" onclick="openPack()">
-        <b>SEE MORE</b>
-      </button>
+      <div class="more-button-div">
+        <button class="more-button" onclick="openPack()">
+          <b>GET MORE</b>
+        </button>
+      </div>
 
       <button class="sound-button" onclick="toggleMute()">
         <div id="muted-button">
