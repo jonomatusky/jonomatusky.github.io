@@ -25,40 +25,10 @@
       let shouldPlay = true
       let targetsFound = 0
 
-      // window.addEventListener('resize', () => {
-      //   let vh = window.innerHeight * 0.01
-      //   document.documentElement.style.setProperty('--vh', `${vh}px`)
-      // })
-
-      // AFRAME.registerComponent('play-on-click', {
-      //   init: function () {
-      //     this.onClick = this.onClick.bind(this)
-      //   },
-      //   play: function () {
-      //     window.addEventListener('click', this.onClick)
-      //   },
-      //   pause: function () {
-      //     window.removeEventListener('click', this.onClick)
-      //   },
-      //   onClick: function (evt) {
-      //     var videoEl = this.el.getAttribute('material').src
-      //     if (!videoEl) {
-      //       return
-      //     }
-      //     this.el.object3D.visible = true
-      //     console.log(this.el.id)
-      //     console.log(`${activeEntity}-a-video`)
-      //     if (isRecognized && this.el.id === `${activeEntity}-a-video`) {
-      //       videoEl.play()
-      //     }
-      //   },
-      // })
-
       const packs = {
         groundup: 'https://plynth.com/p/60ba0b0a96c6780017bd3179',
         astronaut: 'https://plynth.com/p/6091568de2aafe00170a134f',
-        building: 'https://plynth.com/p/609bb2b34cd1c90017c75379',
-        garden: 'https://plynth.com/p/6081978db93b8e0017544379',
+        almost: 'https://plynth.com/p/60a29bd6478608001737f1d1',
       }
 
       const play = () => {
@@ -110,29 +80,7 @@
         const groundupTarget = document.querySelector('#groundup-target')
         const astronautTarget = document.querySelector('#astronaut-target')
         const almostTarget = document.querySelector('#almost-target')
-        const playContainer = document.querySelector('.play-container')
-        const pauseContainer = document.querySelector('.pause-container')
         const turnTarget = document.querySelector('#turn-around-target')
-
-        // const moreButton = document.getElementsByClassName('more-button')[0]
-
-        // playContainer.addEventListener('click', event => {
-        //   playWithTap()
-        // })
-
-        // pauseContainer.addEventListener('click', event => {
-        //   pauseWithTap()
-        // })
-
-        // document.querySelectorAll('.play-plane')
-        // const planes = document.querySelectorAll('.play-plane')
-        // console.log(planes)
-        // planes.forEach(playButton => {
-        //   playButton.addEventListener('click', event => {
-        //     console.log('button clicked')
-        //     playWithTap()
-        //   })
-        // })
 
         const sceneEl = document.querySelector('a-scene')
 
@@ -140,47 +88,10 @@
           document.querySelector('.error-screen').style.display = 'flex'
         })
 
-        // document.querySelectorAll('.video').forEach(item => {
-
-        //   item.addEventListener('play', event => {
-        //     console.log('play event')
-        //     isPlaying = true
-        //     document.getElementsByClassName('play-container')[0].style.display =
-        //       'none'
-        //     document.getElementsByClassName(
-        //       'pause-container'
-        //     )[0].style.display = 'flex'
-        //     const planes = document.querySelectorAll('.play-plane')
-        //     planes.forEach(plane => {
-        //       console.log('got a plane')
-        //       plane.setAttribute('visible', false)
-        //     })
-        //   })
-        //   item.addEventListener('pause', event => {
-        //     console.log('pause event')
-        //     isPlaying = false
-        //     document.getElementsByClassName('play-container')[0].style.display =
-        //       'flex'
-        //     document.getElementsByClassName(
-        //       'pause-container'
-        //     )[0].style.display = 'none'
-        //     document.querySelectorAll('.play-plane').forEach(plane => {
-        //       plane.setAttribute('visible', true)
-        //     })
-        //   })
-        // })
-
-        // const groundupVideo = document.querySelector('#groundup')
-        // const astronautVideo = document.querySelector('#astronaut')
-        // const almostVideo = document.querySelector('#almost')
-
-        // const playerButton = document.getElementsByClassName('player-button')[0]
-
         const targetFound = elementId => {
           if (activeEntity !== elementId) {
             activeEntity = elementId
             let src = packs[elementId]
-            // document.getElementById('pack-iframe').src = src
           }
 
           play()
@@ -189,15 +100,6 @@
           targetsFound = targetsFound + 1
 
           document.querySelector('.player-container').style.display = 'flex'
-
-          // if (shouldPlay) {
-          //   play()
-          // }
-
-          // document.getElementsByClassName('question-button')[0].style.display =
-          //   'none'
-          // document.getElementsByClassName('more-button')[0].style.display =
-          //   'block'
         }
 
         const targetLost = elementId => {
@@ -212,11 +114,6 @@
 
           pause()
           activeEntity = null
-
-          // document.getElementsByClassName('question-button')[0].style.display =
-          //   'block'
-          // document.getElementsByClassName('more-button')[0].style.display =
-          //   'none'
         }
 
         groundupTarget.addEventListener('targetFound', event => {
@@ -246,37 +143,11 @@
         turnTarget.addEventListener('targetFound', event => {
           console.log('Target Found')
         })
-
-        // moreButton.addEventListener('click', event => {
-        //   console.log('more button clicked')
-        //   video = document.getElementById(activeEntity)
-        //   console.log(video)
-        //   video.pause()
-        //   isPlaying = false
-        //   isRecognized = false
-        //   activeEntity = null
-        // })
-
-        // playerButton.addEventListener('click', event => {
-        //   console.log('play button tapped')
-        //   if (isRecognized && isPlaying) {
-        //     pause()
-        //   } else if (isRecognized && !isPlaying) {
-        //     play()
-        //   }
-        // })
       })
 
       const openPack = () => {
-        isPlaying = false
-        shouldPlay = false
-        isScanning = false
-        document.getElementById('pack').style.left = '0%'
-      }
-
-      const closePack = () => {
-        isScanning = true
-        document.getElementById('pack').style.left = '100%'
+        console.log('opening')
+        location.href = packs[activeEntity]
       }
     </script>
 
@@ -309,42 +180,28 @@
       }
 
       .player-container {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 2;
         display: none;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        align-content: flex-end;
-        justify-content: center;
       }
 
-      .player-button {
+      .sound-button {
         background-color: #00000000;
         border: none;
         color: #ffffff;
         text-align: center;
         text-decoration: none;
-        font-size: 40px;
+        font-size: 32px;
         padding: 0px;
         margin: auto;
-        bottom: 20px;
         display: block;
         position: absolute;
+        z-index: 1000;
+        bottom: 10px;
+        right: 20px;
+        height: 40px;
       }
 
       .pause-container {
         display: none;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-      }
-
-      .play-container {
-        display: flex;
         justify-content: center;
         width: 100%;
         height: 100%;
@@ -363,57 +220,37 @@
         z-index: 1000;
       }
 
-      .share-button {
-        bottom: 10px;
-        left: 10px;
-        width: 45px;
-        height: 45px;
-        font-size: 24px;
-      }
-
-      .question-button {
-        bottom: 10px;
-        right: 10px;
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
-      }
-
       .more-button {
-        bottom: 10px;
-        right: 10px;
-        height: 40px;
-        font-size: 16px;
-        border-radius: 20px;
-        padding-right: 15px;
-        padding-left: 15px;
-        display: none;
-      }
-
-      .top-button {
-        background-color: #00000000;
+        background-color: #3786f6;
         border: none;
+        border-radius: 30px;
+        min-width: 120px;
         color: #ffffff;
         text-align: center;
         text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        font-size: 24px;
+        font-size: 40px;
         padding: 0px;
-        margin: 0px;
+        margin: auto;
+        display: block;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        height: 40px;
+        position: absolute;
+        z-index: 1000;
+        margin: auto;
+        bottom: 10px;
+        left: 0px;
+        right: 0px;
+        height: 40px;
+        font-size: 16px;
+        padding-right: 20px;
+        padding-left: 20px;
       }
 
       .tl-button {
         top: 10px;
         left: 10px;
-      }
-
-      .sound-button {
-        top: 10px;
-        right: 10px;
       }
 
       #reticle-container {
@@ -511,22 +348,6 @@
       </button>
       <iframe id="pack-iframe" height="100%" width="100%"></iframe>
     </div>
-    <!-- <button class="top-button tl-button ui">
-      <i class="fas fa-bolt"></i>
-    </button> -->
-    <!-- <button class="top-button sound-button ui">
-      <i class="fas fa-volume-down"></i>
-    </button> -->
-    <!-- <button class="button share-button ui">
-      <i class="fas fa-arrow-up"></i>
-    </button> -->
-    <!-- <button class="ui button question-button">
-      <i class="fas fa-question"></i>
-    </button>
-    <button class="ui button more-button" onclick="openPack()">
-      <b>MORE</b>
-      <i class="fas fa-chevron-right"></i>
-    </button> -->
 
     <div class="error-screen">
       <div class="error-message">
@@ -566,22 +387,18 @@
     </div>
 
     <div class="player-container">
-      <div class="play-container">
-        <div
-          style="
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            padding-top: 2rem;
-            position: relative;
-          "
-        >
-          <button class="player-button play-button" onclick="toggleMute()">
-            <i id="unmuted-button" class="fas fa-volume-down"></i>
-            <i id="muted-button" class="fas fa-volume-mute"></i>
-          </button>
+      <button class="more-button" onclick="openPack()">
+        <div style="width: 100%; font-size: 10px"><b>SEE MORE</b></div>
+      </button>
+
+      <button class="sound-button" onclick="toggleMute()">
+        <div id="muted-button">
+          <i class="fas fa-volume-mute"></i>
         </div>
-      </div>
+        <div id="unmuted-button">
+          <i class="fas fa-volume-down"></i>
+        </div>
+      </button>
     </div>
 
     <div id="reticle-container" class="hidden">
@@ -646,67 +463,16 @@
           playsinline
           webkit-playsinline
         ></video>
-        <!-- <img
-          id="play-button"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play.png"
-          crossorigin="anonymous"
-        />
-        <img
-          id="play-button-vertical"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play-vertical.svg"
-          crossorigin="anonymous"
-        />
-        <img
-          id="play-button-as"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/play-button-almost-sex.svg"
-          crossorigin="anonymous"
-        /> -->
         <img
           id="turn-around"
           src="https://plynth-barebones.s3.us-east-2.amazonaws.com/postcard-back-section-message.png"
           crossorigin="anonymous"
         />
-        <!-- <img
-          id="astronaut-image"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Postcard+Mixtape+Vol+1+600px.jpg"
-          crossorigin="anonymous"
-        />
-        <img
-          id="groundup-image"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Front+Postcard-+GUM+June+2021+(1).jpg"
-          crossorigin="anonymous"
-        />
-        <img
-          id="almost-image"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/AS+Target.png"
-          crossorigin="anonymous"
-        /> -->
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
-        <!-- <a-image
-          width="1"
-          height="1.5"
-          position="0 0 .05"
-          rotation="0 0 0"
-          src="#play-button-vertical"
-          class="play-plane"
-          material="transparent:false; alphaTest: 0.5;"
-          id="play-button-vertical-plane"
-        >
-        </a-image>
-        <a-image
-          width="1"
-          height="1.5"
-          position="0 0 .005"
-          rotation="0 0 0"
-          src="#astronaut-image"
-          class="play-plane"
-          material="transparent:false; alphaTest: 0.5;"
-          id="play-button-plane"
-        ></a-image> -->
         <a-video
           src="#astronaut"
           id="astronaut-a-video"
@@ -717,28 +483,6 @@
         ></a-video>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 1" id="groundup-target">
-        <!-- <a-image
-          width="1"
-          height="0.667"
-          position="0 0 .05"
-          rotation="0 0 0"
-          src="#play-button"
-          class="play-plane"
-          material="transparent:false; alphaTest: 0.5;"
-          id="play-button-plane"
-        >
-        </a-image> -->
-        <!-- <a-image
-          width="1"
-          height="0.667"
-          position="0 0 .005"
-          rotation="0 0 0"
-          src="#groundup-image"
-          class="play-plane"
-          material="transparent:false; alphaTest: 0.5;"
-          id="play-button-plane"
-        >
-        </a-image> -->
         <a-video
           src="#groundup"
           id="groundup-a-video"
@@ -749,27 +493,6 @@
         ></a-video>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 2" id="almost-target">
-        <!-- <a-image
-          width="1"
-          height="1.22"
-          position="0 0 .05"
-          rotation="0 0 0"
-          src="#play-button-as"
-          class="play-plane"
-          material="transparent:false; alphaTest: 0.5;"
-          id="play-button-as-plane"
-        ></a-image>
-        <a-image
-          width="1"
-          height="1.22"
-          position="0 0 .005"
-          rotation="0 0 0"
-          src="#almost-image"
-          class="play-plane"
-          material="transparent:false; alphaTest: 0.5;"
-          id="play-button-plane"
-        >
-        </a-image> -->
         <a-video
           src="#almost"
           id="almost-a-video"
