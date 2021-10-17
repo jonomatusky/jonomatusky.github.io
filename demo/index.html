@@ -31,6 +31,12 @@
         almost: 'https://plynth.com/p/60a29bd6478608001737f1d1',
       }
 
+      window.onpageshow = function (event) {
+        if (event.persisted) {
+          window.location.reload()
+        }
+      }
+
       const play = () => {
         video = document.getElementById(activeEntity)
         if (video) {
