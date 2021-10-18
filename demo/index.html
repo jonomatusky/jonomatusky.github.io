@@ -234,6 +234,7 @@
         bottom: 20px;
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
       }
 
       .more-button {
@@ -430,9 +431,14 @@
       </button> -->
 
       <div class="more-button-div">
-        <button class="more-button" onclick="openPack()">
-          <b>GET MORE</b>
-        </button>
+        <div style="flex: 0 0 100%; color: #ffffffaa; text-align: center; padding-bottom: 4px;">
+          <i class="fas fa-chevron-up"></i>
+        </div>
+        <div style="flex: 0 0 100%; text-align: center">
+          <button class="more-button" onclick="openPack()">
+            <b>GET MORE</b>
+          </button>
+        </div>
       </div>
 
       <button class="sound-button" onclick="toggleMute()">
