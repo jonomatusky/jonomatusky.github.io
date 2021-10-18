@@ -273,6 +273,24 @@
         display: none;
       }
 
+      #reticle-container-loading {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+      }
+
+      #reticle-container-loading.hidden {
+        display: none;
+      }
+
       #reticle {
         position: relative;
         width: 90vw;
@@ -288,6 +306,9 @@
           linear-gradient(to top, #fff 5px, transparent 5px) 100% 100%;
         background-repeat: no-repeat;
         background-size: 40px 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       #pack {
@@ -341,6 +362,25 @@
       a:active,
       a:visited {
         color: white;
+      }
+
+      .loader {
+        border: 16px solid #222;
+        border-top: 16px solid white;
+        opacity: 0.8;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
     </style>
   </head>
@@ -421,9 +461,27 @@
       </div>
     </div>
 
+    <div id="reticle-container-loading" class="hidden">
+      <div style="display: flex; justify-content: center; width: 100%">
+        <div id="reticle">
+          <div class="loader"></div>
+        </div>
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          padding-top: 2rem;
+        "
+      >
+        <img src="/scan-instruction.svg" style="width: 40vw" />
+      </div>
+    </div>
+
     <a-scene
       loading-screen="backgroundColor: black"
-      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-umg-four.mind;"
+      mindar-image="uiScanning: #reticle-container; uiLoading: #reticle-container-loading; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-umg-four.mind;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
