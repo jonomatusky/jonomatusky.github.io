@@ -17,6 +17,12 @@
       src="https://kit.fontawesome.com/575b5e8416.js"
       crossorigin="anonymous"
     ></script>
+    <srcipt>
+      <script
+        src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"
+        crossorigin="anonymous"
+      ></script>
+    </srcipt>
     <script>
       let isRecognized = false
       let activeEntity = null
@@ -37,18 +43,28 @@
         }
       }
 
-      const play = entity => {
-        video = document.getElementById(entity)
+      const play = () => {
+        video = document.getElementById(activeEntity)
         if (video) {
           video.play()
         }
       }
 
-      const pause = entity => {
-        video = document.getElementById(entity)
+      const pause = () => {
+        video = document.getElementById(activeEntity)
         if (video) {
           video.pause()
         }
+      }
+
+      const playWithTap = () => {
+        play()
+        shouldPlay = true
+      }
+
+      const pauseWithTap = () => {
+        shouldPlay = false
+        pause()
       }
 
       let isMuted = true
@@ -182,14 +198,14 @@
         color: #ffffff;
         text-align: center;
         text-decoration: none;
-        font-size: 40px;
+        font-size: 32px;
         padding: 0px;
         margin: auto;
         display: block;
         position: absolute;
         z-index: 1000;
         bottom: 20px;
-        right: 30px;
+        right: 25px;
         height: 40px;
       }
 
@@ -347,6 +363,12 @@
   <body>
     <div id="pack"></div>
 
+    <div class="loading-screen">
+      <div>
+        <h2>Loading Your experience</h2>
+      </div>
+    </div>
+
     <div class="error-screen">
       <div class="error-message">
         <div>
@@ -423,90 +445,32 @@
 
     <a-scene
       loading-screen="backgroundColor: black"
-      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/targets-umg-four.mind;"
+      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/pcmt-oct-targets.mind;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
       <a-assets>
-        <video
-          id="astronaut"
-          class="video"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/astronaut-ar-trimmed.mp4"
-          poster="https://plynth-barebones.s3.us-east-2.amazonaws.com/Postcard+Mixtape+Vol+1+600px.jpg"
-          preload="auto"
-          controls
-          muted
-          crossorigin="anonymous"
-          loop="true"
-          playsinline
-          webkit-playsinline
-        ></video>
-        <video
-          id="groundup"
-          class="video"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Snarky+Puppy+Trimmed.mp4"
-          poster="https://plynth-barebones.s3.us-east-2.amazonaws.com/Front+Postcard-+GUM+June+2021+(1).jpg"
-          preload="auto"
-          controls
-          muted
-          crossorigin="anonymous"
-          playsinline
-          webkit-playsinline
-        ></video>
-        <video
-          id="almost"
-          class="video"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Almost+Sex+-+Smallest.mp4"
-          poster="https://plynth-barebones.s3.us-east-2.amazonaws.com/AS+Target.png"
-          preload="auto"
-          controls
-          muted
-          crossorigin="anonymous"
-          playsinline
-          webkit-playsinline
-        ></video>
         <img
-          id="turn-around"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/postcard-back-section-message.png"
+          id="pcmt"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/PCMT-October-Smaller.gif"
           crossorigin="anonymous"
         />
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0" id="astronaut-target">
-        <a-video
-          src="#astronaut"
-          id="astronaut-a-video"
-          width="1"
-          height="1.5"
-          position="0 0 0"
-          rotation="0 0 0"
-        ></a-video>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 1" id="groundup-target">
-        <a-video
-          src="#groundup"
-          id="groundup-a-video"
+      <a-entity mindar-image-target="targetIndex: 0" id="pcmt-target">
+        <a-plane
           width="1"
           height="0.667"
           position="0 0 0"
           rotation="0 0 0"
-        ></a-video>
+          material="shader:gif;src:#pcmt;"
+        ></a-plane>
       </a-entity>
-      <a-entity mindar-image-target="targetIndex: 2" id="almost-target">
-        <a-video
-          src="#almost"
-          id="almost-a-video"
-          width="1"
-          height="1.22"
-          position="0 0 0"
-          rotation="0 0 0"
-        ></a-video>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 3" id="turn-around-target">
+      <!-- <a-entity mindar-image-target="targetIndex: 1" id="turn-around-target">
         <a-image
           width="1"
           height="0.470"
@@ -515,7 +479,7 @@
           src="#turn-around"
           id="turn-a-around"
         ></a-image>
-      </a-entity>
+      </a-entity> -->
     </a-scene>
   </body>
 </html>
