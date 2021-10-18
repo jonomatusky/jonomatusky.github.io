@@ -184,6 +184,24 @@
         display: none;
       }
 
+      #reticle-container-loading {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+      }
+
+      #reticle-container-loading.hidden {
+        display: none;
+      }
+
       #reticle {
         position: relative;
         width: 90vw;
@@ -363,7 +381,7 @@
 
     <a-scene
       loading-screen="backgroundColor: black"
-      mindar-image="uiScanning: #reticle-container; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/pcmt-oct-targets.mind;"
+      mindar-image="uiScanning: #reticle-container; uiLoading: #reticle-container-loading; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/pcmt-oct-targets.mind;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
