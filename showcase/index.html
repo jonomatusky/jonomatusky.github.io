@@ -148,7 +148,8 @@
         bottom: 0px;
         padding-bottom: 20px;
         height: 60px;
-        background-color: #0f0a10;
+        background-color: white;
+        color: black;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -283,10 +284,9 @@
   <body>
     <div id="pack">
       <div style="top: 0; right: 4px; position: absolute">
-        <a href="https://open.spotify.com/playlist/3GzyfkfLHkN9uUZ1ctJodJ"
-          ><button class="pack-close tr-button ui">
-            <i class="fas fa-chevron-down"></i></button
-        ></a>
+        <button class="pack-close tr-button ui">
+          <i class="fas fa-chevron-down"></i>
+        </button>
       </div>
     </div>
 
@@ -333,20 +333,12 @@
       </button> -->
 
       <div class="more-button-div">
-        <div
-          style="
-            flex: 0 0 100%;
-            color: #ffffffaa;
-            text-align: center;
-            padding-bottom: 4px;
-          "
-        >
-          <i class="fas fa-chevron-up"></i>
-        </div>
         <div style="flex: 0 0 100%; text-align: center">
-          <button class="more-button" onclick="openPack()">
-            <b>Open Mixtape</b>
-          </button>
+          <a href="https://open.spotify.com/playlist/3GzyfkfLHkN9uUZ1ctJodJ">
+            <button class="more-button">
+              <b>Open Playlist</b>
+            </button>
+          </a>
         </div>
       </div>
 
@@ -361,7 +353,7 @@
         "
       >
         <iframe
-          src="https://open.spotify.com/playlist/3GzyfkfLHkN9uUZ1ctJodJ"
+          src="https://open.spotify.com/embed/playlist/3GzyfkfLHkN9uUZ1ctJodJ"
           width="100%"
           height="80"
           frameborder="0"
@@ -416,7 +408,7 @@
       <a-assets>
         <img
           id="overlay"
-          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Philly+Showcase+-+Overlay.png"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Philly+Showcase+-+for+Plynth+-+Artists.png"
           crossorigin="anonymous"
         />
       </a-assets>
@@ -426,8 +418,8 @@
       <a-entity mindar-image-target="targetIndex: 0" id="pcmt-target">
         <a-image
           width="1"
-          height="1"
-          position="0 0.167 .05"
+          height="1.25"
+          position="0 0 .05"
           rotation="0 0 0"
           src="#overlay"
           class="overlay-plane"
