@@ -1,0 +1,441 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image.prod.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://aframe.io/releases/1.2.0/aframe.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image-aframe.prod.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/575b5e8416.js"
+      crossorigin="anonymous"
+    ></script>
+    <srcipt>
+      <script
+        src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"
+        crossorigin="anonymous"
+      ></script>
+    </srcipt>
+    <script>
+      window.onpageshow = function (event) {
+        if (event.persisted) {
+          window.location.reload()
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const pcmtTarget = document.querySelector('#pcmt-target')
+
+        const sceneEl = document.querySelector('a-scene')
+
+        sceneEl.addEventListener('arError', event => {
+          document.querySelector('.error-screen').style.display = 'flex'
+        })
+
+        const targetFound = elementId => {
+          document.querySelector('.player-container').style.display = 'flex'
+        }
+
+        const targetLost = elementId => {
+          document.querySelector('.player-container').style.display = 'none'
+        }
+
+        pcmtTarget.addEventListener('targetFound', event => {
+          targetFound('pcmt')
+        })
+
+        pcmtTarget.addEventListener('targetLost', event => {
+          targetLost('pcmt')
+        })
+      })
+
+      const openPack = () => {
+        document.getElementById('pack').style.top = '0'
+      }
+
+      const closePack = () => {
+        document.getElementById('pack').style.top = '100%'
+      }
+
+      // const takeScreenshot = () => {
+      //   document
+      //     .querySelector('a-scene')
+      //     .components.screenshot.capture('equirectangular')
+      // }
+    </script>
+
+    <style>
+      i {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .a-loader-title {
+        display: hidden;
+      }
+
+      .button-div {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .player-container {
+        display: none;
+      }
+
+      .sound-button {
+        background-color: #00000000;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-size: 32px;
+        padding: 0px;
+        margin: auto;
+        display: block;
+        position: absolute;
+        z-index: 1000;
+        bottom: 20px;
+        right: 25px;
+        height: 40px;
+      }
+
+      /* .share-button {
+        background-color: #00000000;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-size: 32px;
+        padding: 0px;
+        margin: auto;
+        display: block;
+        position: absolute;
+        z-index: 1000;
+        bottom: 10px;
+        left: 20px;
+        height: 40px;
+      } */
+
+      .pause-container {
+        display: none;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      #unmuted-button {
+        display: none;
+      }
+
+      #muted-button {
+        display: block;
+      }
+
+      .more-button-div {
+        position: absolute;
+        z-index: 900;
+        margin: 0 auto;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        padding-bottom: 20px;
+        height: 60px;
+        background-color: #0f0a10;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .more-button {
+        background-color: #a63f32;
+        border: none;
+        border-radius: 30px;
+        min-width: 120px;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+        height: 40px;
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      .tr-button {
+        top: 10px;
+        right: 10px;
+      }
+
+      #reticle-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+      }
+
+      #reticle-container.hidden {
+        display: none;
+      }
+
+      #reticle-container-loading {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+      }
+
+      #reticle-container-loading.hidden {
+        display: none;
+      }
+
+      #reticle {
+        position: relative;
+        width: 90vw;
+        height: 105vw;
+        opacity: 0.8;
+        background: linear-gradient(to right, #fff 5px, transparent 5px) 0 0,
+          linear-gradient(to right, #fff 5px, transparent 5px) 0 100%,
+          linear-gradient(to left, #fff 5px, transparent 5px) 100% 0,
+          linear-gradient(to left, #fff 5px, transparent 5px) 100% 100%,
+          linear-gradient(to bottom, #fff 5px, transparent 5px) 0 0,
+          linear-gradient(to bottom, #fff 5px, transparent 5px) 100% 0,
+          linear-gradient(to top, #fff 5px, transparent 5px) 0 100%,
+          linear-gradient(to top, #fff 5px, transparent 5px) 100% 100%;
+        background-repeat: no-repeat;
+        background-size: 40px 40px;
+      }
+
+      #pack {
+        background: #a63f32;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2000;
+        top: 100%;
+        overflow-x: hidden;
+        transition: 0.5s;
+      }
+
+      .pack-close {
+        border: none;
+        color: #ffffff;
+        background-color: #00000000;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 24px;
+      }
+
+      .error-screen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10000;
+        display: none;
+      }
+
+      .error-message {
+        background-color: #000000;
+        color: #ffffff;
+        border-radius: 10px;
+        width: 100%;
+        margin: 60px 20px 60px 20px;
+        padding: 20px;
+        justify-content: center;
+        font-family: 'roboto', 'helvetica', sans-serif;
+      }
+
+      a,
+      a:hover,
+      a:active,
+      a:visited {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pack">
+      <div style="top: 0; right: 4px; position: absolute">
+        <a href="https://open.spotify.com/playlist/3GzyfkfLHkN9uUZ1ctJodJ"
+          ><button class="pack-close tr-button ui">
+            <i class="fas fa-chevron-down"></i></button
+        ></a>
+      </div>
+    </div>
+
+    <div class="error-screen">
+      <div class="error-message">
+        <div>
+          <h3><b>Something went wrong</b></h3>
+        </div>
+        <div>
+          <p>
+            We're unable to access your device's camera. Try switching browsers,
+            or follow these steps and then refresh the page:
+          </p>
+        </div>
+
+        <div>
+          <p>
+            <b>On iPhone:</b>
+            Open the Settings app → Scroll down and tap your browser icon → Flip
+            switch next to "Camera"
+          </p>
+        </div>
+
+        <div>
+          <p>
+            <b>On Android:</b>
+            Open the Settings app → Scroll down and tap your browser icon → Tap
+            Permissions → Flip switch next to "Camera"
+          </p>
+        </div>
+        <div>
+          <p>
+            If that doesn't work,
+            <a href="https://plynth.com/s/contact" target="_blank">contact us</a
+            >.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="player-container">
+      <!-- <button class="share-button" onclick="takeScreenshot()">
+        <i class="fas fa-share"></i>
+      </button> -->
+
+      <div class="more-button-div">
+        <div
+          style="
+            flex: 0 0 100%;
+            color: #ffffffaa;
+            text-align: center;
+            padding-bottom: 4px;
+          "
+        >
+          <i class="fas fa-chevron-up"></i>
+        </div>
+        <div style="flex: 0 0 100%; text-align: center">
+          <button class="more-button" onclick="openPack()">
+            <b>Open Mixtape</b>
+          </button>
+        </div>
+      </div>
+
+      <div
+        style="
+          position: absolute;
+          bottom: 80px;
+          left: 0;
+          right: 0;
+          top: auto;
+          z-index: 500;
+        "
+      >
+        <iframe
+          src="https://open.spotify.com/playlist/3GzyfkfLHkN9uUZ1ctJodJ"
+          width="100%"
+          height="80"
+          frameborder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+        ></iframe>
+      </div>
+    </div>
+
+    <div id="reticle-container" class="hidden">
+      <div style="display: flex; justify-content: center; width: 100%">
+        <div id="reticle"></div>
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          padding-top: 2rem;
+        "
+      >
+        <img src="/scan-instruction.svg" style="width: 40vw" />
+      </div>
+    </div>
+
+    <div id="reticle-container-loading" class="hidden">
+      <div style="display: flex; justify-content: center; width: 100%">
+        <div id="reticle">
+          <div class="loader"></div>
+        </div>
+      </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          padding-top: 2rem;
+        "
+      >
+        <img src="/scan-instruction.svg" style="width: 40vw" />
+      </div>
+    </div>
+
+    <a-scene
+      loading-screen="backgroundColor: black"
+      mindar-image="uiScanning: #reticle-container; uiLoading: #reticle-container-loading; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/1caa5708-d60e-4773-bc7d-57eca9c5a292.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <img
+          id="overlay"
+          src="https://plynth-barebones.s3.us-east-2.amazonaws.com/Philly+Showcase+-+Overlay.png"
+          crossorigin="anonymous"
+        />
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" id="pcmt-target">
+        <a-image
+          width="1"
+          height="1"
+          position="0 0.167 .05"
+          rotation="0 0 0"
+          src="#overlay"
+          class="overlay-plane"
+          material="transparent:false; alphaTest: 0.5;"
+          id="overlay-plane"
+        >
+        </a-image>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
