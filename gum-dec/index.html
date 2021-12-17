@@ -25,10 +25,6 @@
       let shouldPlay = true
       let targetsFound = 0
 
-      const packs = {
-        concert: 'https://plynth.com/p/61ae0cd0c8e0f20018bf703a',
-      }
-
       window.onpageshow = function (event) {
         if (event.persisted) {
           window.location.reload()
@@ -88,8 +84,6 @@
 
           if (activeEntity !== elementId) {
             activeEntity = elementId
-
-            let src = packs[elementId]
           }
 
           isRecognized = true
@@ -121,7 +115,7 @@
       })
 
       const openPack = () => {
-        setTimeout(() => (location.href = packs[activeEntity]), 500)
+        // setTimeout(() => (location.href = packs[activeEntity]), 500)
         document.getElementById('pack').style.top = '0'
       }
 
@@ -361,7 +355,14 @@
     </style>
   </head>
   <body>
-    <div id="pack"></div>
+    <div id="pack">
+      <iframe
+        id="pack-iframe"
+        height="100%"
+        width="100%"
+        src="https://plynth.com/p/61ae0cd0c8e0f20018bf703a"
+      ></iframe>
+    </div>
 
     <div class="error-screen">
       <div class="error-message">
