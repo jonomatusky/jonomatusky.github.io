@@ -115,7 +115,10 @@
       })
 
       const openPack = () => {
-        // setTimeout(() => (location.href = packs[activeEntity]), 500)
+        setTimeout(
+          () => (document.getElementById('scene').style.display = 'none'),
+          500
+        )
         document.getElementById('pack').style.top = '0'
       }
 
@@ -469,6 +472,7 @@
     </div>
 
     <a-scene
+      id="scene"
       loading-screen="backgroundColor: black"
       mindar-image="uiScanning: #reticle-container; uiLoading: #reticle-container-loading; imageTargetSrc: https://plynth-barebones.s3.us-east-2.amazonaws.com/afafb7aa-19e0-4a80-9415-b0f97f3b6524.mind;"
       color-space="sRGB"
