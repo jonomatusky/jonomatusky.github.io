@@ -115,10 +115,10 @@
       })
 
       const openPack = () => {
-        setTimeout(
-          () => (document.getElementById('scene').style.display = 'none'),
-          500
-        )
+        setTimeout(() => {
+          document.getElementById('scene').style.display = 'none'
+        }, 500)
+        pause('concert')
         document.getElementById('pack').style.top = '0'
       }
 
